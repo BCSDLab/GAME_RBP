@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Blue_Hitpoint
+  - Red_Hitpoint
+  - Blue_Note
+  - Red_Note
+  - Purple_Hitpoint_Redside
+  - Purple_Hitpoint_Blueside
   layers:
   - Default
   - TransparentFX
