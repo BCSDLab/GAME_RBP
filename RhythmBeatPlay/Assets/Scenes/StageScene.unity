@@ -202,9 +202,23 @@ MonoBehaviour:
   OnDragLeft:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8510236}
-        m_MethodName: test
-        m_Mode: 1
+      - m_Target: {fileID: 725764012}
+        m_MethodName: Turn
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnDragRight:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 725764012}
+        m_MethodName: Turn
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -213,9 +227,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnDragRight:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &104938758
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,6 +657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba600871e6838d943bf98744cf693220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spinTime: 0.3
   StagePrefab: {fileID: 2300497585601629778, guid: ee0c9e2c1cfef2847a734cb847e9eb85,
     type: 3}
 --- !u!4 &725764013

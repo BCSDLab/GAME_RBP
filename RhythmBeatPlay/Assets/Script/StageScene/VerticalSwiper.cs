@@ -28,6 +28,7 @@ public class VerticalSwiper : MonoBehaviour, IPointerDownHandler, IDragHandler, 
     {
         begin = eventData.position;
         down = true;
+        downTime = 0f;
     }
 
     public virtual void OnPointerUp(PointerEventData eventData)
