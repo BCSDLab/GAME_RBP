@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Stage : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    public int number;
     void Update()
     {
         transform.rotation = Quaternion.Euler(0,0,0);
         
+    }
+    public void init(int num, Vector3 position)
+    {
+        number = num;
+        transform.position = position;
+        name = "Stage" + number.ToString();
     }
 }

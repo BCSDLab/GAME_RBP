@@ -39,12 +39,12 @@ public class VerticalSwiper : MonoBehaviour, IPointerDownHandler, IDragHandler, 
     {
         if (down)
         {
-            if (begin.x - eventData.position.x < -activeDistance)
+            if (begin.x - eventData.position.x > activeDistance)
             {
                 OnDragLeft.Invoke();
                 down = false;
             }
-            else if (begin.x - eventData.position.x > activeDistance)
+            else if (begin.x - eventData.position.x < -activeDistance)
             {
                 OnDragRight.Invoke();
                 down = false;
