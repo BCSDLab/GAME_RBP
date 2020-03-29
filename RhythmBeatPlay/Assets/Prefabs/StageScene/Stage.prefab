@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2300497585601629776}
   - component: {fileID: 2300497585601629777}
   m_Layer: 0
-  m_Name: front
+  m_Name: Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,3 +92,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29d87ccf603d74142bf0cfe8fa5471b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  number: 0
+  preview: {fileID: 8300000, guid: cc3ccdd31fd1cdd41bcd284e738d0725, type: 3}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Stage : MonoBehaviour
 {
     public int number;
+    public AudioClip preview;
     void Update()
     {
         transform.rotation = Quaternion.Euler(0,0,0);
