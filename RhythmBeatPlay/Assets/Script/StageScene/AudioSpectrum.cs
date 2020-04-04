@@ -89,13 +89,28 @@ public class AudioSpectrum : MonoBehaviour
     }
     private void Update()
     {
-        var sample = getSample();
-        var barScale = resizeSample(sliceSample(sample, lowIgnore, highIgnore));
-        barScale = reshapeScale(barScale);
-        for (int i = 0; i < barAmount; ++i)
+        if (baseAudio.isPlaying)
         {
-            float scale = barScale[i] * amplification;
-            rescaleBar(barArray[i], scale);
+            var sample = getSample();
+            var barScale = resizeSample(sliceSample(sample, lowIgnore, highIgnore));
+            barScale = reshapeScale(barScale);
+            for (int i = 0; i < barAmount; ++i)
+            {
+                float scale = barScale[i] * amplification;
+                rescaleBar(barArray[i], scale);
+            }
         }
+    }
+    public void play(AudioClip audio)
+    {
+        gameObject.SetActive(true);
+        baseAudio.clip = audio;
+        baseAudio.Play();
+
+    }
+    public void stop()
+    {
+        baseAudio.Stop();
+        gameObject.SetActive(false);
     }
 }

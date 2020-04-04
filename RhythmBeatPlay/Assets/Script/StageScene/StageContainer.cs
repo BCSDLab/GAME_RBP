@@ -10,23 +10,13 @@ public class StageContainer : MonoBehaviour
     public GameObject preview;
     public Transform[] spawnPoints;
     public Stage stagePrefab;
+    public AudioSpectrum audioSpectrum;
     private bool spinning = false;
     private int frontSpawn = 0;
     private List<Stage> stages = new List<Stage>();
-    void Start()
+    private int stageComparer(Stage s1, Stage s2) //stage 정렬을 위한 비교자
     {
-        Destroy(preview);
-        for (int i = -2; i <= 2; ++i)
-        {
-            if (isValidStage(i + stageNumber))
-            {
-                spawnStage(i);
-            }
-        }
-    }
-    private bool isValidStage(int snum) //stage 위치 유효성 검사
-    {
-        return snum >= 0 && snum < stageSize;
+        return s1.number - s2.number;
     }
     private void spawnStage(int relation) //상대 위치로 stage 생성 후 번호순으로 정렬
     {
@@ -37,32 +27,26 @@ public class StageContainer : MonoBehaviour
         stages.Add(stage);
         stages.Sort(stageComparer);
     }
-    private int stageComparer(Stage s1, Stage s2) //stage 정렬을 위한 비교자
+    private bool isValidStage(int snum) //stage 위치 유효성 검사
     {
-        return s1.number - s2.number;
+        return snum >= 0 && snum < stageSize;
     }
-    public void turn(bool isLeft) //스테이지 회전
+    void Start()
     {
-        int direction = isLeft ? 1 : -1;
-        if (!spinning && isValidStage(stageNumber + direction))
+        Destroy(preview);
+        for (int i = -2; i <= 2; ++i)
         {
-            destroyLostStage(direction);
-            if (isValidStage(stageNumber + 3 * direction))
-                spawnStage(3 * direction);
-            stageNumber += direction;
-            frontSpawn = (frontSpawn + direction + 8) % 8;
-            StartCoroutine(stageTurn(direction));
+            if (isValidStage(i + stageNumber))
+            {
+                spawnStage(i);
+            }
         }
+        audioSpectrum.play(stages.Find(stage => stage.number == stageNumber).preview);
     }
-    private void destroyLostStage(int direction) //보이지 않을 스테이지 삭제
+    private void basisRotate(Quaternion origin, float yAngle)
     {
-        int lostPosition = stageNumber - 2 * direction;
-        if (isValidStage(lostPosition))
-        {
-            var lostStage = stages.Find((s1) => s1.number == lostPosition);
-            stages.Remove(lostStage);
-            Destroy(lostStage.gameObject);
-        }
+        transform.rotation = origin;
+        transform.Rotate(0, yAngle, 0);
     }
     private IEnumerator stageTurn(int direction) //스테이지를 spinTime동안 회전시킨다. direction 1:left, -1:right
     {
@@ -79,11 +63,31 @@ public class StageContainer : MonoBehaviour
             yield return null;
         }
         basisRotate(originRotation, 45f * direction);
+        audioSpectrum.play(stages.Find(stage => stage.number==stageNumber).preview);
         spinning = false;
     }
-    private void basisRotate(Quaternion origin, float yAngle)
+    private void destroyLostStage(int direction) //보이지 않을 스테이지 삭제
     {
-        transform.rotation = origin;
-        transform.Rotate(0, yAngle, 0);
+        int lostPosition = stageNumber - 2 * direction;
+        if (isValidStage(lostPosition))
+        {
+            var lostStage = stages.Find((s1) => s1.number == lostPosition);
+            stages.Remove(lostStage);
+            Destroy(lostStage.gameObject);
+        }
+    }
+    public void turn(bool isLeft) //스테이지 회전
+    {
+        int direction = isLeft ? 1 : -1;
+        if (!spinning && isValidStage(stageNumber + direction))
+        {
+            audioSpectrum.stop();
+            destroyLostStage(direction);
+            if (isValidStage(stageNumber + 3 * direction))
+                spawnStage(3 * direction);
+            stageNumber += direction;
+            frontSpawn = (frontSpawn + direction + 8) % 8;
+            StartCoroutine(stageTurn(direction));
+        }
     }
 }
