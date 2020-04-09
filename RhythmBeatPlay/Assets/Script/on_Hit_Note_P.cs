@@ -7,6 +7,8 @@ using UnityEngine;
 */
 public class on_Hit_Note_P : MonoBehaviour
 {
+    public GameObject follow_fan;
+    float fan_angle;
     bool is_Hitpoint_Red;
     
     private void Awake()
@@ -15,10 +17,11 @@ public class on_Hit_Note_P : MonoBehaviour
         is_Hitpoint_Red = (this.tag == "Purple_Hitpoint_Redside");
     }
 
-    // Update is called once per frame
+    // fan을 따라다니도록 만든 코드.
     void Update()
     {
-        
+        fan_angle = follow_fan.transform.eulerAngles.z + 73.63f;
+        this.transform.rotation = Quaternion.Euler(0,0,fan_angle);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,16 +30,18 @@ public class on_Hit_Note_P : MonoBehaviour
         {
             if (is_Hitpoint_Red)
             {
-                collision.GetComponent<purple_Note_Touching>().trigger_red();
+                collision.GetComponent<purple_Note_Touching>().red_triggered = true;
+                Debug.Log("red triggered");
             }
             else
             {
-                collision.GetComponent<purple_Note_Touching>().trigger_blue();
+                collision.GetComponent<purple_Note_Touching>().blue_triggered = true;
+                Debug.Log("blue triggered");
             }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    /*private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.tag == "Purple_Note")
         {
@@ -45,5 +50,5 @@ public class on_Hit_Note_P : MonoBehaviour
             else
                 collision.GetComponent<purple_Note_Touching>().untrigger_blue();
         }
-    }
+    }*/
 }

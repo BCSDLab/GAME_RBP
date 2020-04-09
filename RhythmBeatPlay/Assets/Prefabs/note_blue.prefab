@@ -107,13 +107,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.13192102, y: -1.7046876}
-      - {x: -0.1323187, y: -1.7783349}
-      - {x: 0.036469303, y: -1.7862982}
-      - {x: 0.18972811, y: -1.7770165}
-      - {x: 0.1891772, y: -1.775053}
-      - {x: 0.1903619, y: -1.6982126}
-      - {x: 0.18975112, y: -1.6994295}
+    - - {x: -0.1278801, y: -1.7072133}
+      - {x: -0.13383408, y: -1.7737889}
+      - {x: 0.025861815, y: -1.777206}
+      - {x: 0.18564141, y: -1.775053}
+      - {x: 0.17914364, y: -1.704986}
 --- !u!50 &6841891503198077082
 Rigidbody2D:
   serializedVersion: 4
@@ -147,8 +145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be713f3f50d5324fa53725ba744947f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starting_Time: 0
-  ending_Time: 0
   updateTime: 0.03
   scale: 0.3
   changeScaleFrame: 0
