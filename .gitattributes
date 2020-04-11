@@ -2,3 +2,4 @@
 Firebase/*.* filter=lfs diff=lfs merge=lfs -text
 Firebase/* filter=lfs diff=lfs merge=lfs -text
 Firebase/ filter=lfs diff=lfs merge=lfs -text
+*.so filter=lfs diff=lfs merge=lfs -text
