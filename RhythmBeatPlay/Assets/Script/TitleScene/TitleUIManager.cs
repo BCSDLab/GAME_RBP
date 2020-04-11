@@ -7,52 +7,51 @@ using UnityEngine.SceneManagement;
 
 public class TitleUIManager : MonoBehaviour
 {
-    public Button settingButton;
-    public GameObject MainMenu;
-    public GameObject SubMenu;
-    public Text tokenText;
-    public Text DriveToken;
+    private static TitleUIManager instance;
+
+    public Button loginButton;
+    public GameObject subMenu;
+
+    public static TitleUIManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<TitleUIManager>();
+
+                return instance;
+            }
+            return instance;
+        }
+    }
+
+    #region Unity Function
 
     private void Awake()
     {
-        // refreshUI(PlayCloudDataManager.Instance.isAuthenticated);
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayCloudDataManager.Instance.loginEvent.AddListener(refreshUI);
-
-        getDriveToken();
+        PlayCloudDataManager.Instance.loginEvent.AddListener(loginRefreshUI);
     }
 
-    // Update is called once per frame
-    int tick = 0;
-    int temptok = 0;
-    int sec = 0;
+    private void OnDestroy()
+    {
+        PlayCloudDataManager.Instance.loginEvent.RemoveListener(loginRefreshUI);
+    }
+    #endregion
+
     void Update()
     {
-        tokenText.text = "Token : " + DataManager.Instance.token;
-        if (++tick > 60)
-        {
-            tick = 0;
-            sec += 1;
-        }
+        
     }
 
-    public void getDriveToken()
-    {
-        if (!Application.isEditor)
-        {
-            if (DataManager.Instance.IsConnected)
-            {
-                PlayCloudDataManager.Instance.LoadFromCloud((string dataToLoad) => { DataManager.Instance.token = int.Parse(dataToLoad); });
-                DriveToken.text = "Sec : "+ sec + ", "+ "Drive Token : " + DataManager.Instance.token;
-            }
-        }
-    }
 
-    public void refreshUI(bool isSigned)
+    public void loginRefreshUI(bool isSigned)
     {
 
         if (isSigned)
@@ -65,19 +64,14 @@ public class TitleUIManager : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        PlayCloudDataManager.Instance.loginEvent.RemoveListener(refreshUI);
-    }
-
     private void OnLogOutUIRefresh(bool isSigned)
     {
-        MainMenu.SetActive(true);
+        loginButton.gameObject.SetActive(true);
     }
 
     private void OnLoginUIRefresh(bool isSigned)
     {
-        MainMenu.SetActive(false);
+        loginButton.gameObject.SetActive(false);
     }
 
     public void ToStageScene()
@@ -88,13 +82,13 @@ public class TitleUIManager : MonoBehaviour
         }
     }
 
-    public void SettingsButtonClicked()
+    public void ShowSubMenu()
     {
-        SubMenu.transform.localPosition = new Vector3(0f, 0f, 0f);
+        subMenu.transform.localPosition = new Vector3(0f, 0f, 0f);
     }
 
-    public void SettingsButtonCanceled()
+    public void CloseSubMenu()
     {
-        SubMenu.transform.localPosition = new Vector3(1920f, 0f, 0f);
+        subMenu.transform.localPosition = new Vector3(1920f, 0f, 0f);
     }
 }

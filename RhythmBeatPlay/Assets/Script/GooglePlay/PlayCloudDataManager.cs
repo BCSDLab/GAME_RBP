@@ -24,7 +24,6 @@ public class PlayCloudDataManager : MonoBehaviour
 {
     private static PlayCloudDataManager instance;
     public LoginEvent loginEvent;
-    public Text logText;
 
     public static PlayCloudDataManager Instance
     {
@@ -90,7 +89,7 @@ public class PlayCloudDataManager : MonoBehaviour
             if (isAuthenticated) {
                 return Social.localUser.id;
             }
-            return "local";
+            return "";
         }
         private set { }
     }
@@ -133,26 +132,17 @@ public class PlayCloudDataManager : MonoBehaviour
                     if (!success)
                     {
                         Debug.Log("Fail Login");
-                        logText.text = "LOGIN FAILED";
                     }
                     else
                     {
                         Debug.Log("Login Succeed");
-                        // loginEvent.Invoke(success);
-                        logText.text = "LOGIN SUCCESS";
                     }
                 });
-            }
-            else
-            {
-                // loginEvent.Invoke(isAuthenticated);
-                logText.text = "Already Signed";
             }
             loginEvent.Invoke(isAuthenticated);
         }
         else
         {
-            logText.text = "Login Success";
             loginEvent.Invoke(true);
         }
     }
@@ -160,7 +150,6 @@ public class PlayCloudDataManager : MonoBehaviour
     public void Logout()
     {
          PlayGamesPlatform.Instance.SignOut();
-        logText.text = "Logouted";
         if (!Application.isEditor)
         {
             loginEvent.Invoke(isAuthenticated);

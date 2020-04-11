@@ -16,13 +16,21 @@ public class SubMenu : MonoBehaviour
         
     }
 
-    void OnLogoutButtonClicked()
+    public void onLogoutButtonClicked()
     {
         PlayCloudDataManager.Instance.Logout();
+        onCloseButtonClicked();
     }
 
-    void OnSubMenuCloseButtonClicked()
+    public void onCloseButtonClicked()
     {
-
+        TitleUIManager.Instance.CloseSubMenu();
     }
+
+    public void ShowSettingBoard() { }
+
+    public void ShowCreditBoard() { }
+
+    public void ShowCopyrightBoard() { }
+
 }
