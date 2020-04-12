@@ -78,13 +78,27 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public float volume
+    public float music_volume
     {
-        get {
-            return PlayerPrefs.GetFloat("volume", 0);
+        get
+        {
+            return PlayerPrefs.GetFloat("music_volume", 0.5f);
         }
-        set {
-            PlayerPrefs.SetFloat("volume", value);
+        set
+        {
+            PlayerPrefs.SetFloat("music_volume", value);
+        }
+    }
+
+    public float bgs_volume
+    {
+        get
+        {
+            return PlayerPrefs.GetFloat("bgs_volume", 0.5f);
+        }
+        set
+        {
+            PlayerPrefs.SetFloat("bgs_volume", value);
         }
     }
 

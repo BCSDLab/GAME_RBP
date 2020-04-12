@@ -27,7 +27,20 @@ public class SubMenu : MonoBehaviour
         TitleUIManager.Instance.CloseSubMenu();
     }
 
-    public void ShowSettingBoard() { }
+    public void ShowSettingBoard()
+    {
+        GameObject settingBoard = Instantiate(Resources.Load("Prefabs/SettingBoardPrefab", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+
+        if (settingBoard)
+        {
+            settingBoard.transform.SetParent(this.transform);
+            settingBoard.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            Debug.Log("Cannot load prefab");
+        }
+    }
 
     public void ShowCreditBoard() { }
 
