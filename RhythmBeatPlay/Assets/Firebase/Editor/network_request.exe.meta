@@ -1,10 +1,3 @@
-fileFormatVersion: 2
-guid: d3cd5d0a941c4cdc8ab4b1b684b05191
-labels:
-- gvh
-- gvh_version-6.12.0
-timeCreated: 1480838400
-DefaultImporter:
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+version https://git-lfs.github.com/spec/v1
+oid sha256:2f411e4be6452b61b45c4000a797a227d8f21900d5a2e5dda94049c13b29b93b
+size 189
