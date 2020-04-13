@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stage : MonoBehaviour
+public class Selectable : MonoBehaviour
 {
     public int number;
+    public string objectName;
     public AudioClip preview;
     void Update()
     {
@@ -15,6 +16,6 @@ public class Stage : MonoBehaviour
     {
         number = num;
         transform.position = position;
-        name = "Stage" + number.ToString();
+        name = "Object" + number.ToString();
     }
 }
