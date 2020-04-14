@@ -88,7 +88,7 @@ public class BPMcheck : MonoBehaviour
                 {
                     //bool ticked 를 트루로
                     ticked = true;
-                    //온틱 메서드 호출
+                    //매 틱마다 호출되는 bpm 체크 구문.
                     this.OnTick();
                 }
             }

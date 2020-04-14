@@ -103,7 +103,7 @@ public class note_spawning : MonoBehaviour
     {
         if (noteData[num_data_count].getBar() == _beatcount)
         {
-            Instantiate(obj[noteData[num_data_count].getType()], new Vector3(0f, 5.0f, 0f), Quaternion.Euler(0, 0, noteData[num_data_count].getDegree()));
+            Instantiate(obj[noteData[num_data_count].getType()], new Vector3(420f, 420f, 0f), Quaternion.Euler(0, 0, noteData[num_data_count].getDegree()));
             if (num_data_count < totalNoteCount)
             {
                 num_data_count++;

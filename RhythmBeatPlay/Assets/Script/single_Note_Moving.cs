@@ -4,7 +4,7 @@ using UnityEngine;
 public class single_Note_Moving : MonoBehaviour
 {
     private Vector3 minimalSize = new Vector3(0, 0, 1);
-    private Vector3 maxSize = new Vector3(5, 5, 1);
+    private Vector3 maxSize = new Vector3(210, 210, 1);
     // 관리 변수
     public float changeScaleFrame = 0.0f;
 
