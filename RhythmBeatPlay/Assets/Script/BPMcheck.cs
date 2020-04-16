@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class BPMcheck : MonoBehaviour
 {
+    // 시간 보정 값.
+    public float time_Fixed; 
 
     // 백그라운드 노래
     public AudioSource bgMusic;
@@ -31,8 +33,7 @@ public class BPMcheck : MonoBehaviour
     void Start()
     {
         Screen.SetResolution(Screen.width, Screen.height, true);
-        //this.img_OutLine.transform.localScale= new Vector3(Screen.width, Screen.height,1);
-        this.startTick = AudioSettings.dspTime;
+        this.startTick = AudioSettings.dspTime + time_Fixed;
         //시작틱은, AudioSettings.dspTime; 
         // 오디오 시스템의 현재 시각을 돌려줍니다.
         this.sampleRate = AudioSettings.outputSampleRate;
@@ -45,16 +46,16 @@ public class BPMcheck : MonoBehaviour
             if (!this.musicOnOff)
             {
                 //음악 시작
-                StartCoroutine(SongStart());
+                Debug.Log("Song On");
+                //StartCoroutine(SongStart());
+                this.bgMusic.gameObject.GetComponent<AudioSource>().Play();
                 this.r1 = StartCoroutine(this.Metronome());
                 //this.r2 = StartCoroutine(this.Up());
                 this.musicOnOff = true;
-
-
             }
             else
             {
-                this.bgMusic.gameObject.SetActive(false);
+                this.bgMusic.gameObject.GetComponent<AudioSource>().Stop();
                 StopCoroutine(r1);
                 //StopCoroutine(r2);
                 this.musicOnOff = false;
@@ -67,9 +68,6 @@ public class BPMcheck : MonoBehaviour
     IEnumerator SongStart()
     {
         yield return new WaitForSeconds(2.0f);
-        this.bgMusic.gameObject.SetActive(true);
-        Debug.Log("Song On");
-
     }
     //메트로놈 설정
     private IEnumerator Metronome()
@@ -86,11 +84,11 @@ public class BPMcheck : MonoBehaviour
                 ticked = false;
                 //bool 틱 = false;
                 nextTick += this.spb;
-                if (!ticked && nextTick >= AudioSettings.dspTime) //&& this.bgMusic.isPlaying)
+                if (!ticked && nextTick >= AudioSettings.dspTime && this.bgMusic.isPlaying)
                 {
                     //bool ticked 를 트루로
                     ticked = true;
-                    //온틱 메서드 호출
+                    //매 틱마다 호출되는 bpm 체크 구문.
                     this.OnTick();
                 }
             }
@@ -111,5 +109,7 @@ public class BPMcheck : MonoBehaviour
             Debug.LogFormat("<color=blue>{0}</color>", this.bitCount);
         }
         this.bitCount++;
+        // 디버그용 비트 체크기.
     }
+
 }

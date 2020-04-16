@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class purple_Note_Touching : MonoBehaviour
 {
-    bool red_triggered;
-    bool blue_triggered;
+    public GameObject FX_OnHitNote;
+    public GameObject score_Manager;
+
+    public bool red_triggered;
+    public bool blue_triggered;
 
     // Start is called before the first frame update
     void Start()
     {
+        score_Manager = GameObject.Find("ScoreManager");
         red_triggered = false;
         blue_triggered = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnMouseDown()
@@ -25,28 +23,8 @@ public class purple_Note_Touching : MonoBehaviour
         if(red_triggered && blue_triggered)
         {
             Destroy(this.gameObject);
+            score_Manager.GetComponent<score_Manager>().Increase_Score();
+            GameObject Fx_hitnote_clone = Instantiate(FX_OnHitNote, new Vector3(0, 5, 0), this.transform.rotation);
         }
-    }
-
-    public void trigger_red()
-    {
-        red_triggered = true;
-        Debug.Log("red triggered");
-    }
-
-    public void trigger_blue()
-    {
-        blue_triggered = true;
-        Debug.Log("blue triggered");
-    }
-
-    public void untrigger_red()
-    {
-        red_triggered = false;
-    }
-
-    public void untrigger_blue()
-    {
-        blue_triggered = false;
     }
 }

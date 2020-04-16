@@ -10,6 +10,8 @@ TagManager:
   - Red_Note
   - Purple_Hitpoint_Redside
   - Purple_Hitpoint_Blueside
+  - Purple_Note
+  - Circle
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Fan
   - 
   - 
   - 

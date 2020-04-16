@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2410803603146073159}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -107,13 +107,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.13192102, y: -1.7046876}
-      - {x: -0.1323187, y: -1.7783349}
-      - {x: 0.036469303, y: -1.7862982}
-      - {x: 0.18972811, y: -1.7770165}
-      - {x: 0.1891772, y: -1.775053}
-      - {x: 0.1903619, y: -1.6982126}
-      - {x: 0.18975112, y: -1.6994295}
+    - - {x: -0.12073021, y: -1.7053094}
+      - {x: -0.122371316, y: -1.7727396}
+      - {x: 0.035847574, y: -1.7782159}
+      - {x: 0.19415087, y: -1.7725662}
+      - {x: 0.19037285, y: -1.7056465}
 --- !u!50 &2410803603146073144
 Rigidbody2D:
   serializedVersion: 4
@@ -147,8 +145,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be713f3f50d5324fa53725ba744947f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starting_Time: 0
-  ending_Time: 0
-  updateTime: 0.03
-  scale: 0.3
   changeScaleFrame: 0
+  timeStartedLerp: 0
