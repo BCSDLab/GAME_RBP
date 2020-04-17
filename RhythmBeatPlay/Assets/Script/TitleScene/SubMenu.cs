@@ -16,14 +16,15 @@ public class SubMenu : MonoBehaviour
         
     }
 
-    public void onLogoutButtonClicked()
+    public void OnLogoutButtonClicked()
     {
         PlayCloudDataManager.Instance.Logout();
-        onCloseButtonClicked();
+        OnCloseButtonClicked();
     }
 
-    public void onCloseButtonClicked()
+    public void OnCloseButtonClicked()
     {
+        BGSPlayer.Instance.playBGS("buttonOFF");
         TitleUIManager.Instance.CloseSubMenu();
     }
 

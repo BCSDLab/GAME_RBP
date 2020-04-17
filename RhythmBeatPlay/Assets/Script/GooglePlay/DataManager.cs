@@ -20,9 +20,7 @@ public class DataManager : MonoBehaviour
                 instance = FindObjectOfType<DataManager>();
                 if (instance == null)
                 {
-                    GameObject container = new GameObject("DataManager");
-
-                    instance = container.AddComponent<DataManager>();
+                    instance = new GameObject("PlayerData").AddComponent<DataManager>();
                 }
             }
             return instance;
@@ -158,7 +156,7 @@ public class DataManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(transform.gameObject);
     }
 
     // Start is called before the first frame update
@@ -179,7 +177,7 @@ public class DataManager : MonoBehaviour
 
     #region private function
 
-    private bool isRuntime() {
+    private bool IsRuntime() {
         if (!Application.isEditor)
         {
             if (IsConnected)
