@@ -86,15 +86,19 @@ public class TitleUIManager : MonoBehaviour
         }
     }
 
-    public void ShowSubMenu()
+    public void OnSettingButtonClicked()
     {
         BGSPlayer.Instance.playBGS("buttonON");
+        ShowSubMenu();
+    }
+
+    public void ShowSubMenu()
+    {
         subMenu.transform.localPosition = new Vector3(0f, 0f, 0f);
     }
 
     public void CloseSubMenu()
     {
-        BGSPlayer.Instance.playBGS("buttonOFF");
         subMenu.transform.localPosition = new Vector3(1920f, 0f, 0f);
     }
 }
