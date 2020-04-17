@@ -48,11 +48,6 @@ public class BGSPlayer : MonoBehaviour
         bgsPlayer.volume = 1.0f;
         bgsPlayer.loop = false;
         DontDestroyOnLoad(transform.gameObject);
-
-        if (bgsPlayer)
-        {
-            bgsPlayer = instance.gameObject.AddComponent<AudioSource>();
-        }
     }
 
     // Start is called before the first frame update
@@ -80,7 +75,7 @@ public class BGSPlayer : MonoBehaviour
             if (bgsClip)
             {
                 bgs_set.Add(name, bgsClip);
-                bgsPlayer.PlayOneShot(bgsClip);
+                bgsPlayer.PlayOneShot(bgsClip, volume_scale);
                 return;
             }
 

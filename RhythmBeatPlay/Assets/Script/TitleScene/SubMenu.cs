@@ -24,7 +24,6 @@ public class SubMenu : MonoBehaviour
 
     public void OnCloseButtonClicked()
     {
-        BGSPlayer.Instance.playBGS("buttonOFF");
         TitleUIManager.Instance.CloseSubMenu();
     }
 
