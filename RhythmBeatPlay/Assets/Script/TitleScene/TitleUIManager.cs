@@ -36,12 +36,12 @@ public class TitleUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayCloudDataManager.Instance.loginEvent.AddListener(loginRefreshUI);
+        PlayCloudDataManager.Instance.loginEvent.AddListener(LoginRefreshUI);
     }
 
     private void OnDestroy()
     {
-        PlayCloudDataManager.Instance.loginEvent.RemoveListener(loginRefreshUI);
+        PlayCloudDataManager.Instance.loginEvent.RemoveListener(LoginRefreshUI);
     }
     #endregion
 
@@ -50,8 +50,7 @@ public class TitleUIManager : MonoBehaviour
         
     }
 
-
-    public void loginRefreshUI(bool isSigned)
+    public void LoginRefreshUI(bool isSigned)
     {
 
         if (isSigned)
@@ -74,12 +73,23 @@ public class TitleUIManager : MonoBehaviour
         loginButton.gameObject.SetActive(false);
     }
 
+    public void OnLoginButtonClicked()
+    {
+        PlayCloudDataManager.Instance.Login();
+    }
+
     public void ToStageScene()
     {
         if (PlayCloudDataManager.Instance.isAuthenticated)
         {
-            SceneManager.LoadScene("StageScene");
+            SceneManager.LoadScene("GameScene");
         }
+    }
+
+    public void OnSettingButtonClicked()
+    {
+        BGSPlayer.Instance.playBGS("buttonON");
+        ShowSubMenu();
     }
 
     public void ShowSubMenu()

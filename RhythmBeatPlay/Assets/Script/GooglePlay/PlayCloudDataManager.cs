@@ -35,7 +35,7 @@ public class PlayCloudDataManager : MonoBehaviour
 
                 if (instance == null)
                 {
-                    instance = new GameObject("PlayGameCloudData").AddComponent<PlayCloudDataManager>();
+                    instance = new GameObject("GoogleAuth").AddComponent<PlayCloudDataManager>();
                 }
             }
 
@@ -116,7 +116,7 @@ public class PlayCloudDataManager : MonoBehaviour
         if (loginEvent == null)
             loginEvent = new LoginEvent();
 
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(transform.gameObject);
     }
 
     public void Login()

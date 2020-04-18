@@ -40,6 +40,7 @@ public class SettingBoard : MonoBehaviour
 
     public void onCloseButtonClicked()
     {
+        BGSPlayer.Instance.playBGS("buttonOFF");
         Destroy(parent);
     }
 

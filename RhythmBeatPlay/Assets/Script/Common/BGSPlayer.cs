@@ -4,8 +4,29 @@ using UnityEngine;
 
 public class BGSPlayer : MonoBehaviour
 {
+    private static BGSPlayer instance;
+
     [SerializeField]
     AudioSource bgsPlayer;
+
+    public static BGSPlayer Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<BGSPlayer>();
+
+                if (instance == null)
+                {
+                    instance = new GameObject("BGSPlayer").AddComponent<BGSPlayer>();
+                }
+            }
+
+            return instance;
+        }
+    }
+
 
     Dictionary<string, AudioClip> bgs_set;
 
@@ -23,8 +44,10 @@ public class BGSPlayer : MonoBehaviour
 
     private void Awake()
     {
+        bgs_set = new Dictionary<string, AudioClip>();
         bgsPlayer.volume = 1.0f;
         bgsPlayer.loop = false;
+        DontDestroyOnLoad(transform.gameObject);
     }
 
     // Start is called before the first frame update
@@ -48,11 +71,11 @@ public class BGSPlayer : MonoBehaviour
         }
         else
         {
-            AudioClip bgsClip = Resources.Load("Asset/BGS/" + name) as AudioClip;
+            AudioClip bgsClip = Resources.Load("Sfxs/BGS/" + name) as AudioClip;
             if (bgsClip)
             {
                 bgs_set.Add(name, bgsClip);
-                bgsPlayer.PlayOneShot(bgsClip);
+                bgsPlayer.PlayOneShot(bgsClip, volume_scale);
                 return;
             }
 
@@ -64,7 +87,7 @@ public class BGSPlayer : MonoBehaviour
 
     public void preloadBGS(string name)
     {
-        AudioClip bgsClip = Resources.Load("Asset/BGS/" + name) as AudioClip;
+        AudioClip bgsClip = Resources.Load("Sfxs/BGS/" + name) as AudioClip;
         if (bgsClip)
         {
             bgs_set.Add(name, bgsClip);
@@ -73,9 +96,9 @@ public class BGSPlayer : MonoBehaviour
 
     public void loadAllBGS()
     {
-        foreach (string filename in System.IO.Directory.GetFiles("Asset/BGS"))
+        foreach (string filename in System.IO.Directory.GetFiles("Asset/Resources/Sfxs/BGS"))
         {
-            AudioClip bgsClip = Resources.Load("Asset/BGS/" + filename) as AudioClip;
+            AudioClip bgsClip = Resources.Load("Sfxs/BGS/" + filename) as AudioClip;
             if (bgsClip)
             {
                 bgs_set.Add(filename, bgsClip);

@@ -16,14 +16,15 @@ public class SubMenu : MonoBehaviour
         
     }
 
-    public void onLogoutButtonClicked()
+    public void OnLogoutButtonClicked()
     {
         PlayCloudDataManager.Instance.Logout();
-        onCloseButtonClicked();
+        OnCloseButtonClicked();
     }
 
-    public void onCloseButtonClicked()
+    public void OnCloseButtonClicked()
     {
+        BGSPlayer.Instance.playBGS("buttonOFF");
         TitleUIManager.Instance.CloseSubMenu();
     }
 
@@ -33,6 +34,7 @@ public class SubMenu : MonoBehaviour
 
         if (settingBoard)
         {
+            BGSPlayer.Instance.playBGS("buttonON");
             settingBoard.transform.SetParent(this.transform);
             settingBoard.transform.localScale = new Vector3(1, 1, 1);
         }
