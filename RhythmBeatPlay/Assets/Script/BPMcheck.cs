@@ -41,34 +41,30 @@ public class BPMcheck : MonoBehaviour
         this.nextTick = startTick + (60d / bpm);
         //다음틱은 오디오시스템의 현재 시각 + 60/bpm startTick + (spb)
 
-        this.btn_Start.onClick.AddListener(() =>
-        {
-            if (!this.musicOnOff)
-            {
-                //음악 시작
-                Debug.Log("Song On");
-                //StartCoroutine(SongStart());
-                this.bgMusic.gameObject.GetComponent<AudioSource>().Play();
-                this.r1 = StartCoroutine(this.Metronome());
-                //this.r2 = StartCoroutine(this.Up());
-                this.musicOnOff = true;
-            }
-            else
-            {
-                this.bgMusic.gameObject.GetComponent<AudioSource>().Stop();
-                StopCoroutine(r1);
-                //StopCoroutine(r2);
-                this.musicOnOff = false;
-                this.bitCount = 0;
-            }
-        });
     }
 
-    // falldown 딜레이를 감안한 노래 재생.
-    IEnumerator SongStart()
+    // 음악 시작 / 일시정지
+    public void MusicStartPause()
     {
-        yield return new WaitForSeconds(2.0f);
+        if (!this.musicOnOff)
+        {
+            //음악 시작
+            Debug.Log("Song On");
+            this.bgMusic.gameObject.GetComponent<AudioSource>().Play();
+            this.r1 = StartCoroutine(this.Metronome());
+            //this.r2 = StartCoroutine(this.Up());
+            this.musicOnOff = true;
+        }
+        else
+        {
+            this.bgMusic.gameObject.GetComponent<AudioSource>().Stop();
+            StopCoroutine(r1);
+            //StopCoroutine(r2);
+            this.musicOnOff = false;
+            this.bitCount = 0;
+        }
     }
+
     //메트로놈 설정
     private IEnumerator Metronome()
     {
@@ -88,7 +84,7 @@ public class BPMcheck : MonoBehaviour
                 {
                     //bool ticked 를 트루로
                     ticked = true;
-                    //매 틱마다 호출되는 bpm 체크 구문.
+                    //매 틱마다 호출되는 bpm 체크 및 노트 스포닝 구문.
                     this.OnTick();
                 }
             }
@@ -96,10 +92,12 @@ public class BPMcheck : MonoBehaviour
         }
     }
 
+    // 디버그용 비트 체크기.
     void OnTick()
     {
         // 노트 스폰.
         GameObject.Find("note_spawner").GetComponent<note_spawning>().noteSpawn(this.bitCount);
+        /* bpm check용 구문.
         if (this.bitCount % 2 == 0)
         {
             Debug.LogFormat("<color=red>{0}</color>", this.bitCount);
@@ -107,9 +105,7 @@ public class BPMcheck : MonoBehaviour
         else
         {
             Debug.LogFormat("<color=blue>{0}</color>", this.bitCount);
-        }
+        }*/
         this.bitCount++;
-        // 디버그용 비트 체크기.
     }
-
 }

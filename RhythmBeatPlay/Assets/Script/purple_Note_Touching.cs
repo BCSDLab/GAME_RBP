@@ -13,7 +13,7 @@ public class purple_Note_Touching : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        score_Manager = GameObject.Find("ScoreManager");
+        score_Manager = GameObject.Find("GameManager");
         red_triggered = false;
         blue_triggered = false;
     }

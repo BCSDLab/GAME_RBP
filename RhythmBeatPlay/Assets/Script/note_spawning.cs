@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+// 해당 부분을 프리팹과 게임 매니저로 옮기는게 맞는것 같음.
 public class note_spawning : MonoBehaviour
 {
     // 노트 경로
@@ -17,6 +18,7 @@ public class note_spawning : MonoBehaviour
     public double rbpm;         // 실질 게임에 적용되는 bpm
     public int totalNoteCount;      // 노트 개수
     public int divCount;       // 한 bpm를 몇마디로 나누어야 하는지.
+    public float musicTime;
 
     public List<note> noteList; // 노트 데이터 리스트
     int num_data_count;
@@ -42,7 +44,8 @@ public class note_spawning : MonoBehaviour
         divCount = int.Parse(data[4][0]);
         rbpm = bpm * divCount;
         this.GetComponent<BPMcheck>().bpm = rbpm;
-        this.GetComponent<BPMcheck>().bgMusic = GameObject.Find(title).GetComponent<AudioSource>(); 
+        this.GetComponent<BPMcheck>().bgMusic = GameObject.Find(title).GetComponent<AudioSource>();
+        musicTime = this.GetComponent<BPMcheck>().bgMusic.clip.length;
     }
 
     void GetNoteData()
@@ -50,7 +53,6 @@ public class note_spawning : MonoBehaviour
         for (int i = 6; i < totalNoteCount + 6; i++)
         {
             noteData.Add(new note(int.Parse(data[i][0]), int.Parse(data[i][1]), int.Parse(data[i][2])));
-            //noteData.Add(new note(int.Parse()));
         }
     }
 
@@ -64,12 +66,6 @@ public class note_spawning : MonoBehaviour
         {
             print(i + " " + data[i][0] + " " + data[i][1] + " " + data[i][2]);
         }
-        /*
-        for (int i = 6; i < data.Count - 1; i++)
-        {
-            print(data[i][0] + " " + data[i][1] + " " + data[i][2]);
-        }
-        */
     }
 
     // 파싱 작업.

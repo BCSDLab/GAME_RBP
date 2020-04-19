@@ -40,15 +40,4 @@ public class on_Hit_Note_P : MonoBehaviour
             }
         }
     }
-
-    /*private void OnTriggerExit2D(Collider2D collision)
-    {
-        if(collision.tag == "Purple_Note")
-        {
-            if (is_Hitpoint_Red)
-                collision.GetComponent<purple_Note_Touching>().untrigger_red();
-            else
-                collision.GetComponent<purple_Note_Touching>().untrigger_blue();
-        }
-    }*/
 }
