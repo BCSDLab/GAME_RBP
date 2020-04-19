@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class SelectManager : MonoBehaviour
@@ -13,8 +14,10 @@ public class SelectManager : MonoBehaviour
     public Transform[] spawnPoints;
     public AudioSpectrum audioSpectrum;
     private bool spinning = false;
+    private bool downed = false;
     private int frontSpawn = 0;
     private List<Selectable> objects = new List<Selectable>();
+    private Vector3 cursorPosition;
     private void changeFrontObject()
     {
         var frontobj = objects.Find(obj => obj.number == selectedObjNumber);
@@ -38,7 +41,7 @@ public class SelectManager : MonoBehaviour
     {
         return snum >= 0 && snum < objectPrefabs.Length;
     }
-    void Start()
+    protected virtual void Start()
     {
         Destroy(preview);
         for (int i = -2; i <= 2; ++i)
@@ -49,6 +52,37 @@ public class SelectManager : MonoBehaviour
             }
         }
         changeFrontObject();
+    }
+    private void checkObjSelect()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            cursorPosition = Input.mousePosition;
+            downed = true;
+        }
+        else if (downed)
+        {
+            if ((cursorPosition - Input.mousePosition).magnitude > 100f)
+            {
+                downed = false;
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                var ray = Camera.main.ScreenPointToRay(cursorPosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.collider.tag == "Selectable" && hit.collider.GetComponent<Selectable>().number == selectedObjNumber)
+                    {
+                        objectSelect();
+                    }
+                }
+            }
+        }
+    }
+    protected virtual void Update()
+    {
+        checkObjSelect();
     }
     private void basisRotate(Quaternion origin, float yAngle)
     {
@@ -96,5 +130,9 @@ public class SelectManager : MonoBehaviour
             frontSpawn = (frontSpawn + direction + 8) % 8;
             StartCoroutine(objectTurn(direction));
         }
+    }
+    protected virtual void objectSelect()
+    {
+
     }
 }

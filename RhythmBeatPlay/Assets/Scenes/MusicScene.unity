@@ -3325,7 +3325,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2135517675}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba600871e6838d943bf98744cf693220, type: 3}
+  m_Script: {fileID: 11500000, guid: 758d5fabaf945ad489e3f6bc330229c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   infomationText: {fileID: 1835805770}
@@ -3344,7 +3344,6 @@ MonoBehaviour:
   - {fileID: 2085258484}
   - {fileID: 1509783449}
   - {fileID: 708080830}
-  - {fileID: 1408420520819336209, guid: 2b2b28c9ac8e8544691692ce5a7198af, type: 3}
   audioSpectrum: {fileID: 1183183630}
 --- !u!4 &2135517677
 Transform:

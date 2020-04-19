@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1408420520819336209}
   - component: {fileID: 1408420520819336210}
   - component: {fileID: 1408420520819336211}
-  m_Layer: 0
+  - component: {fileID: 213573996279198433}
+  m_Layer: 8
   m_Name: 0.SampleStage
-  m_TagString: Untagged
+  m_TagString: Selectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,3 +96,16 @@ MonoBehaviour:
   number: 0
   objectName: Sample Stage
   preview: {fileID: 8300000, guid: cc3ccdd31fd1cdd41bcd284e738d0725, type: 3}
+--- !u!135 &213573996279198433
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408420520819336208}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8.4
+  m_Center: {x: 0, y: 0, z: 0}
