@@ -48,3 +48,16 @@ ehthumbs.db
 Corridor/Library/ShaderCache/
 Corridor/Library/metadata/
 bfg-1.13.0.jar
+
+# Googleplay and Firebase
+
+Assets/GooglePlayGames/
+Assets/Parse/
+Assets/PlayServicesResolver/
+Assets/Plugins/
+Assets/Editor Default Resources/
+Assets/Firebase/
+
+# Resource
+
+Resource/
