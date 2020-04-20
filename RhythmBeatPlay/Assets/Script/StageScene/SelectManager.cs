@@ -31,9 +31,10 @@ public class SelectManager : MonoBehaviour
     private void spawnObject(int relation) //상대 위치로 obj 생성 후 번호순으로 정렬
     {
         int spawnNumber = (frontSpawn + relation + 8) % 8;
+        int objNumber = selectedObjNumber + relation;
         var spawnPosition = spawnPoints[spawnNumber].position;
-        var obj = Instantiate(objectPrefabs[spawnNumber], transform) as Selectable;
-        obj.init(selectedObjNumber + relation, spawnPosition);
+        var obj = Instantiate(objectPrefabs[objNumber], transform) as Selectable;
+        obj.init(objNumber, spawnPosition);
         objects.Add(obj);
         objects.Sort(selectableComparer);
     }

@@ -7,8 +7,10 @@ public class MusicSelectManager : SelectManager
     protected override void Start()
     {
         base.Start();
-        var stage = GameObject.Find("StageSelectManager").GetComponent<StageSelectManager>();
-        stageNumber = stage.selectedObjNumber;
-        Destroy(stage.gameObject);
+        stageNumber = DataObject.inst.stageNumber;
+    }
+    public void backToStageSelect()
+    {
+        SceneManager.LoadScene("StageScene");
     }
 }
