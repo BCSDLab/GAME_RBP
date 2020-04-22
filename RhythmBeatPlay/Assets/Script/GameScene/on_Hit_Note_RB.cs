@@ -5,7 +5,7 @@
 */
 public class on_Hit_Note_RB : MonoBehaviour
 {
-    public GameObject FX_OnHitNote;
+    //public GameObject FX_OnHitNote;
     public GameObject score_Manager;
 
     void Start()
@@ -18,10 +18,10 @@ public class on_Hit_Note_RB : MonoBehaviour
         if (this.tag == "Blue_Hitpoint" && collision.gameObject.tag == "Blue_Note" ||
            this.tag == "Red_Hitpoint" && collision.gameObject.tag == "Red_Note")
         {
-            GameObject Fx_hitnote_clone = Instantiate(FX_OnHitNote, new Vector3(0,5,0), collision.transform.rotation );
+            //GameObject Fx_hitnote_clone = Instantiate(FX_OnHitNote, new Vector3(0,5,0), collision.transform.rotation );
             score_Manager.GetComponent<score_Manager>().Increase_Score();
-            Destroy(Fx_hitnote_clone, 0.3f);
-            Destroy(collision.gameObject);
+            //Destroy(Fx_hitnote_clone, 0.3f);
+            //Destroy(collision.gameObject);
         }
     }
 }

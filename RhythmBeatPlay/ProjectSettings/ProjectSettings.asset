@@ -668,6 +668,7 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Collab: 1
     UNet: 1
   luminIcon:
     m_Name: 
@@ -691,7 +692,7 @@ PlayerSettings:
   cloudProjectId: 90381ebb-0348-4f31-b262-de0b3c1aac96
   framebufferDepthMemorylessMode: 0
   projectName: Rhythm Beat Play
-  organizationId: bcsdgame
+  organizationId: rhythm-beat-play
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
