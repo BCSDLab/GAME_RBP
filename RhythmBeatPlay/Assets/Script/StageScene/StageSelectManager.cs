@@ -10,13 +10,6 @@ public class StageSelectManager : SelectManager
     protected override void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.Space))
-
-        {
-
-            SceneLoader.Instance.LoadScene("MusicScene");
-
-        }
     }
     protected override void objectSelect()
     {
