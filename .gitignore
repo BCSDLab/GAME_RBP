@@ -51,13 +51,14 @@ bfg-1.13.0.jar
 
 # Googleplay and Firebase
 
-Assets/GooglePlayGames/
-Assets/Parse/
-Assets/PlayServicesResolver/
-Assets/Plugins/
-Assets/Editor Default Resources/
-Assets/Firebase/
+RhythmBeatPlay/Assets/GooglePlayGames/
+RhythmBeatPlay/Assets/Parse/
+RhythmBeatPlay/Assets/PlayServicesResolver/
+RhythmBeatPlay/Assets/Plugins/
+RhythmBeatPlay/Assets/Editor Default Resources/
+RhythmBeatPlay/Assets/Firebase/
 
 # Resource
 
 Resource/
+RhythmBeatPlay/Assets/Resources
