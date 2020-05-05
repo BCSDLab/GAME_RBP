@@ -22,6 +22,8 @@ public class UI_Manager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         Start_Counter.text = null;
+        // pause 가 카운팅 이후로부터 가능하도록 함.
+        Game_Manager.instance.is_pause_possible = true;
         this.GetComponent<Game_Manager>().note_spawner.GetComponent<BPMcheck>().MusicStartPause();
     }
 }

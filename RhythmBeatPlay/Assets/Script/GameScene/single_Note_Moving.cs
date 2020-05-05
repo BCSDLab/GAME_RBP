@@ -18,7 +18,15 @@ public class single_Note_Moving : MonoBehaviour
 
     private void Update()
     {
-        Lerp();
+        if (Game_Manager.instance.is_pause == false)
+            Lerp();
+        else
+            WaitForLerp();
+    }
+    
+    public void WaitForLerp()
+    {
+        timeStartedLerp += Time.deltaTime;
     }
 
     public Vector3 Lerp(float lerpTime = 2)
@@ -27,7 +35,9 @@ public class single_Note_Moving : MonoBehaviour
         float percentageComplete = timeSinceStarted / lerpTime;
 
         var result = Vector3.Lerp(minimalSize, maxSize, percentageComplete);
-        this.transform.localScale = result;
+        
+            this.transform.localScale = result;
+            
         return result;
     }
 }

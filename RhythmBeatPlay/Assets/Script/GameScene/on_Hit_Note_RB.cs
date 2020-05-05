@@ -20,8 +20,9 @@ public class on_Hit_Note_RB : MonoBehaviour
         {
             //GameObject Fx_hitnote_clone = Instantiate(FX_OnHitNote, new Vector3(0,5,0), collision.transform.rotation );
             score_Manager.GetComponent<score_Manager>().Increase_Score();
+            Game_Manager.instance.note_died++;
             //Destroy(Fx_hitnote_clone, 0.3f);
-            //Destroy(collision.gameObject);
+            Destroy(collision.gameObject);
         }
     }
 }
