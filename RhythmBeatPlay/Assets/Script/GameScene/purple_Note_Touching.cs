@@ -23,6 +23,7 @@ public class purple_Note_Touching : MonoBehaviour
         if(red_triggered && blue_triggered)
         {
             Destroy(this.gameObject);
+            Game_Manager.instance.note_died++;
             score_Manager.GetComponent<score_Manager>().Increase_Score();
             GameObject Fx_hitnote_clone = Instantiate(FX_OnHitNote, new Vector3(0, 5, 0), this.transform.rotation);
         }
