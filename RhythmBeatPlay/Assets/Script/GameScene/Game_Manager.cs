@@ -9,6 +9,7 @@ public class Game_Manager : MonoBehaviour
     GameObject pause_ui;
     public int note_died = 0;
     public Text Start_Counter;
+    public string musicSelection = "82_BPM_Dubstep";
 
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class Game_Manager : MonoBehaviour
     int temp_count = 0;
     private void Update()
     {
-        if(note_died >= note_spawner.GetComponent<note_spawning>().totalNoteCount)
+        if (note_died > GameObject.Find(musicSelection).GetComponent<MusicData>().GetNoteCount())
         {
             Debug.Log("Song Ended");
         }
