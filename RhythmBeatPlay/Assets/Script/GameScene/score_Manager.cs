@@ -15,7 +15,7 @@ public class score_Manager : MonoBehaviour
     void Start()
     {
         score = 0;
-        note_Count = GameObject.Find("note_spawner").GetComponent<note_spawning>().totalNoteCount;
+        note_Count = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteCount();
         score_Step = 1000000 / note_Count;
     }
 
