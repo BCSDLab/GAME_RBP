@@ -49,10 +49,11 @@ public class SelectManager : MonoBehaviour
                 spawnObject(i);
             }
         }
+        audioSpectrum.play(objects.Find(obj => obj.number == selectedObjNumber).preview);
     }
     private void checkObjSelect()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount != 0 || Input.GetMouseButtonDown(0))
         {
             cursorPosition = Input.mousePosition;
             downed = true;
@@ -66,14 +67,13 @@ public class SelectManager : MonoBehaviour
             else if (Input.GetMouseButtonUp(0))
             {
                 var ray = Camera.main.ScreenPointToRay(cursorPosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit))
+                var hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+                if (hit.collider?.tag == "Selectable" && hit.collider.GetComponent<Selectable>().number == selectedObjNumber)
                 {
-                    if (hit.collider.tag == "Selectable" && hit.collider.GetComponent<Selectable>().number == selectedObjNumber)
-                    {
-                        objectSelect();
-                    }
+                    objectSelect();
                 }
+
             }
         }
     }
@@ -112,6 +112,7 @@ public class SelectManager : MonoBehaviour
         }
         if (isValidObject(selectedObjNumber + 2 * direction))
             spawnObject(2 * direction);
+        audioSpectrum.play(objects.Find(obj => obj.number == selectedObjNumber).preview);
     }
     private void destroyLostObject(int direction) //보이지 않을 스테이지 삭제
     {
@@ -135,6 +136,6 @@ public class SelectManager : MonoBehaviour
     }
     protected virtual void objectSelect()
     {
-
+        audioSpectrum.stop();
     }
 }

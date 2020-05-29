@@ -13,8 +13,8 @@ public class DataObject : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        DataObject.inst = this;
         DontDestroyOnLoad(this);
+        DataObject.inst = this;
     }
 
 }
