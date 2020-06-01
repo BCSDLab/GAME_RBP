@@ -7,24 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class TitleUIManager : MonoBehaviour
 {
-    private static TitleUIManager instance;
 
     public Button loginButton;
-    public GameObject subMenu;
-
-    public static TitleUIManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<TitleUIManager>();
-
-                return instance;
-            }
-            return instance;
-        }
-    }
+    public SubMenu subMenu;
 
     #region Unity Function
 
@@ -52,7 +37,6 @@ public class TitleUIManager : MonoBehaviour
 
     public void LoginRefreshUI(bool isSigned)
     {
-
         if (isSigned)
         {
             OnLoginUIRefresh(isSigned);
@@ -75,14 +59,33 @@ public class TitleUIManager : MonoBehaviour
 
     public void OnLoginButtonClicked()
     {
-        PlayCloudDataManager.Instance.Login();
+        if (PlayCloudDataManager.Instance.isAuthenticated)
+        {
+            PlayCloudDataManager.Instance.Login();
+        }
+        else
+        {
+            GameObject loginBoard = Instantiate(Resources.Load("Prefabs/TitleScene/LoginMenu", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+
+            if (loginBoard)
+            {
+                BGSPlayer.Instance.playBGS("buttonON");
+                loginBoard.transform.SetParent(this.transform);
+                loginBoard.transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                Debug.Log("Cannot load prefab");
+            }
+        }
     }
 
     public void ToStageScene()
     {
-        if (PlayCloudDataManager.Instance.isAuthenticated)
+        if (PlayCloudDataManager.Instance.isAuthenticated || PlayCloudDataManager.Instance.isGuest)
         {
-            SceneManager.LoadScene("GameScene");
+            // SceneManager.LoadScene("GameScene");
+            SceneLoader.Instance.LoadScene("GameScene");
         }
     }
 
@@ -94,11 +97,11 @@ public class TitleUIManager : MonoBehaviour
 
     public void ShowSubMenu()
     {
-        subMenu.transform.localPosition = new Vector3(0f, 0f, 0f);
+        subMenu.onOpen();
     }
 
     public void CloseSubMenu()
     {
-        subMenu.transform.localPosition = new Vector3(1920f, 0f, 0f);
+        subMenu.onClose();
     }
 }
