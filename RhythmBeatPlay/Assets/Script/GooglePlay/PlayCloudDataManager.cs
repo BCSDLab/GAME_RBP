@@ -43,6 +43,12 @@ public class PlayCloudDataManager : MonoBehaviour
         }
     }
 
+    public bool isGuest
+    {
+        get;
+        private set;
+    }
+
     public bool isProcessing
     {
         get;
@@ -73,7 +79,7 @@ public class PlayCloudDataManager : MonoBehaviour
         {
             if (Application.isEditor)
             {
-                return this;
+                return false;
             }
             else
             {
@@ -89,7 +95,7 @@ public class PlayCloudDataManager : MonoBehaviour
             if (isAuthenticated) {
                 return Social.localUser.id;
             }
-            return "";
+            return "LOCAL_USER";
         }
         private set { }
     }
@@ -119,12 +125,19 @@ public class PlayCloudDataManager : MonoBehaviour
         DontDestroyOnLoad(transform.gameObject);
     }
 
+    public void GuestLogin()
+    {
+        isGuest = true;
+        loginEvent.Invoke(isGuest);
+    }
+
     public void Login()
     {
         PlayGamesPlatform.Activate();
         if (!Application.isEditor)
         {
             // Try logging in if it is not running in the editor
+
             if (!Social.localUser.authenticated)
             {
                 Social.localUser.Authenticate((bool success) =>
@@ -150,6 +163,8 @@ public class PlayCloudDataManager : MonoBehaviour
     public void Logout()
     {
          PlayGamesPlatform.Instance.SignOut();
+        isGuest = false;
+
         if (!Application.isEditor)
         {
             loginEvent.Invoke(isAuthenticated);
@@ -158,7 +173,6 @@ public class PlayCloudDataManager : MonoBehaviour
         {
             loginEvent.Invoke(false);
         }
-
     }
 
     private void ProcessCloudData(byte[] cloudData)
