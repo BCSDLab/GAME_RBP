@@ -12,6 +12,7 @@ TagManager:
   - Purple_Hitpoint_Blueside
   - Purple_Note
   - Circle
+  - Selectable
   layers:
   - Default
   - TransparentFX
@@ -46,6 +47,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Backgrund
+    uniqueID: 1276784177
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Object
+    uniqueID: 1010219793
+    locked: 0
+  - name: UI
+    uniqueID: 383531063
     locked: 0
