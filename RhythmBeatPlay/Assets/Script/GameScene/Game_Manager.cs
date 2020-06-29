@@ -58,21 +58,25 @@ public class Game_Manager : MonoBehaviour
     }*/
 
     // 일시적인 사용의 pause.
-    public void Pause()
+    public void PauseButton()
     {
-        if (is_pause_possible)
+        if (is_pause_possible && !is_pause)
         {
-            if (is_pause == false)
-            {
+            
                 note_spawner.GetComponent<BPMcheck>().bgMusic.Pause();
                 pause_ui.SetActive(true);
                 is_pause = !is_pause;
-            }
-            else
-            {
-                StartCoroutine(PauseCounter());
-            }
             
+
+            
+        }
+    }
+
+    public void ResumeButton()
+    {
+        if (is_pause_possible)
+        {
+            StartCoroutine(PauseCounter());
         }
     }
 
