@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class SelectManager : MonoBehaviour
 {
-    public Text infomationText;
+    public Text selectableName;
+    public Text selectableInfo;
     public int selectedObjNumber = 0;
     public float spinTime = 0.1f;
     public float intervalX = 940f;
@@ -49,7 +50,10 @@ public class SelectManager : MonoBehaviour
                 spawnObject(i);
             }
         }
-        audioSpectrum.play(objects.Find(obj => obj.number == selectedObjNumber).preview);
+        var selectedObj = objects.Find(obj => obj.number == selectedObjNumber);
+        selectableName.text = selectedObj.objectName;
+        selectableInfo.text = selectedObj.objectInfo;
+        audioSpectrum.play(selectedObj.preview);
     }
     private void checkObjSelect()
     {
@@ -112,7 +116,10 @@ public class SelectManager : MonoBehaviour
         }
         if (isValidObject(selectedObjNumber + 2 * direction))
             spawnObject(2 * direction);
-        audioSpectrum.play(objects.Find(obj => obj.number == selectedObjNumber).preview);
+        var selectedObj = objects.Find(obj => obj.number == selectedObjNumber);
+        selectableName.text = selectedObj.objectName;
+        selectableInfo.text = selectedObj.objectInfo;
+        audioSpectrum.play(selectedObj.preview);
     }
     private void destroyLostObject(int direction) //보이지 않을 스테이지 삭제
     {
