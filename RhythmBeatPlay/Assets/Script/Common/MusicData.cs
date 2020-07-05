@@ -1,59 +1,52 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class MusicData : MonoBehaviour
 {
     [SerializeField]
-    AudioClip music;
+    private AudioClip music;
 
     [SerializeField]
-    string title;
+    private string title;
 
     [SerializeField]
-    string artist;
+    private string artist;
 
     [SerializeField]
-    string album;
+    private string album;
 
     [SerializeField]
-    int noteCount;
+    private int noteCount;
 
     [SerializeField]
-    int bpm;
+    private int bpm;
 
     [SerializeField]
-    int musicLengthSecond;
+    private int musicLengthSecond;
 
     // must be scaled 1:1
     [SerializeField]
-    Sprite titleSprite;
+    private Sprite titleSprite;
 
     // must be scaled 16:9
     [SerializeField]
-    Sprite backgroundSprite;
+    private Sprite backgroundSprite;
 
     [SerializeField]
-    TextAsset noteData;
-    
+    private TextAsset noteData;
 
     //
     private void Awake()
     {
-        
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
     }
 
     public AudioClip GetAudioClip()

@@ -1,23 +1,21 @@
-// code reference: http://answers.unity3d.com/questions/894995/how-to-saveload-with-google-play-services.html	
-using UnityEngine;
-using System;
-using System.Collections;
+// code reference: http://answers.unity3d.com/questions/894995/how-to-saveload-with-google-play-services.html
 //gpg
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using GooglePlayGames.BasicApi.SavedGame;
+using System;
+using System.Collections;
+
 //for encoding
 using System.Text;
+using UnityEngine;
+
 //for extra save ui
-using UnityEngine.SocialPlatforms;
 //for text, remove
-using UnityEngine.UI;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 public class LoginEvent : UnityEvent<bool>
 {
-
 }
 
 public class PlayCloudDataManager : MonoBehaviour
@@ -55,7 +53,7 @@ public class PlayCloudDataManager : MonoBehaviour
         private set;
     }
 
-    private string m_saveFileName 
+    private string m_saveFileName
     {
         get
         {
@@ -86,7 +84,8 @@ public class PlayCloudDataManager : MonoBehaviour
     {
         get
         {
-            if (isAuthenticated) {
+            if (isAuthenticated)
+            {
                 return Social.localUser.id;
             }
             return "";
@@ -108,9 +107,9 @@ public class PlayCloudDataManager : MonoBehaviour
         Debug.Log("PlayGamesPlatform Initialized");
     }
 
-	private void Awake()
-	{
-		InitiatePlayGames();
+    private void Awake()
+    {
+        InitiatePlayGames();
 
         //initiate event
         if (loginEvent == null)
@@ -149,7 +148,7 @@ public class PlayCloudDataManager : MonoBehaviour
 
     public void Logout()
     {
-         PlayGamesPlatform.Instance.SignOut();
+        PlayGamesPlatform.Instance.SignOut();
         if (!Application.isEditor)
         {
             loginEvent.Invoke(isAuthenticated);
@@ -158,7 +157,6 @@ public class PlayCloudDataManager : MonoBehaviour
         {
             loginEvent.Invoke(false);
         }
-
     }
 
     private void ProcessCloudData(byte[] cloudData)
@@ -173,45 +171,47 @@ public class PlayCloudDataManager : MonoBehaviour
         loadedData = progress;
     }
 
-    /* 
+    /*
      * How to use
      * PlayCloudDataManager.Instance.LoadFromCloud( (string dataToLoad ) = > { [player_data_manager_name].Instance.[data_name] = long.parse(DataToLoad); } );
      * */
+
     public void LoadFromCloud(Action<string> afterLoadAction)
     {
         if (isAuthenticated && !isProcessing)
         {
-			StartCoroutine(LoadFromCloudRoutin(afterLoadAction));
+            StartCoroutine(LoadFromCloudRoutin(afterLoadAction));
         }
-		else
-		{
-			Login();
-		}
+        else
+        {
+            Login();
+        }
     }
 
-	private IEnumerator LoadFromCloudRoutin(Action<string> loadAction)
-	{
-		isProcessing = true;
-		Debug.Log("Loading game progress from the cloud.");
+    private IEnumerator LoadFromCloudRoutin(Action<string> loadAction)
+    {
+        isProcessing = true;
+        Debug.Log("Loading game progress from the cloud.");
 
-		((PlayGamesPlatform)Social.Active).SavedGame.OpenWithAutomaticConflictResolution(
-			m_saveFileName, //name of file.
-			DataSource.ReadCacheOrNetwork,
-			ConflictResolutionStrategy.UseLongestPlaytime,
-			OnFileOpenToLoad);
+        ((PlayGamesPlatform)Social.Active).SavedGame.OpenWithAutomaticConflictResolution(
+            m_saveFileName, //name of file.
+            DataSource.ReadCacheOrNetwork,
+            ConflictResolutionStrategy.UseLongestPlaytime,
+            OnFileOpenToLoad);
 
-		while(isProcessing)
-		{
-			yield return null;
-		}
+        while (isProcessing)
+        {
+            yield return null;
+        }
 
-		loadAction.Invoke(loadedData);
-	}
+        loadAction.Invoke(loadedData);
+    }
 
-    /* 
+    /*
      * How to use
      * PlayerCloudDataManager.Instance.SaveToCloud( [player_data_manager_name].Instance.[data_name].ToString());
      *  */
+
     public void SaveToCloud(string dataToSave)
     {
         if (isAuthenticated)
@@ -230,7 +230,6 @@ public class PlayCloudDataManager : MonoBehaviour
     {
         if (status == SavedGameRequestStatus.Success)
         {
-
             byte[] data = StringToBytes(loadedData);
 
             SavedGameMetadataUpdate.Builder builder = new SavedGameMetadataUpdate.Builder();
@@ -245,7 +244,6 @@ public class PlayCloudDataManager : MonoBehaviour
         }
     }
 
-
     private void OnFileOpenToLoad(SavedGameRequestStatus status, ISavedGameMetadata metaData)
     {
         if (status == SavedGameRequestStatus.Success)
@@ -257,7 +255,6 @@ public class PlayCloudDataManager : MonoBehaviour
             Debug.LogWarning("Error opening Saved Game" + status);
         }
     }
-
 
     private void OnGameLoad(SavedGameRequestStatus status, byte[] bytes)
     {
