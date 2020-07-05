@@ -1,0 +1,15 @@
+diff a/RhythmBeatPlay/Assets/Script/GameScene/Game_Manager.cs b/RhythmBeatPlay/Assets/Script/GameScene/Game_Manager.cs	(rejected hunks)
+@@ -1,12 +1,11 @@
+ ﻿using System.Collections;
+-using System.Collections.Generic;
+ using UnityEngine;
+ using UnityEngine.UI;
+ 
+ public class Game_Manager : MonoBehaviour
+ {
+     public static Game_Manager instance;
+-    GameObject pause_ui;
++    private GameObject pause_ui;
+     public int note_died = 0;
+     public Text Start_Counter;
+ 

@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MusicDataHolder : MonoBehaviour
 {
     private static MusicDataHolder instance;
 
-    MusicData data;
+    private MusicData data;
 
     public static MusicDataHolder Instance
     {
@@ -35,5 +33,4 @@ public class MusicDataHolder : MonoBehaviour
     {
         data = new_data;
     }
-
 }

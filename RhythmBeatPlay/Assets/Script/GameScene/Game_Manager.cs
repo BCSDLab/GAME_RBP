@@ -25,7 +25,19 @@ public class Game_Manager : MonoBehaviour
         {
             Debug.Log("Song Ended");
         }
+        // 개발 중에만 사용할 부분이며, 알파 버전에서는 지워져야만 함.
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            notemaking_debug();
+        }
     }
+
+    // 디버그용 함수.
+    public void notemaking_debug()
+    {
+        print(note_died+6);
+    }
+
 
     public bool is_pause = false; // 퍼즈 상태인지에 대한 값. 노트 update등에 사용됨.
     public bool is_pause_possible = false; // pause가 가능한 상태인지에 대해 확인해주는 값.
@@ -62,13 +74,9 @@ public class Game_Manager : MonoBehaviour
     {
         if (is_pause_possible && !is_pause)
         {
-            
                 note_spawner.GetComponent<BPMcheck>().bgMusic.Pause();
                 pause_ui.SetActive(true);
                 is_pause = !is_pause;
-            
-
-            
         }
     }
 
