@@ -97,15 +97,6 @@ public class BPMcheck : MonoBehaviour
     {
         // 노트 스폰.
         GameObject.Find("note_spawner").GetComponent<note_spawning>().noteSpawn(this.bitCount);
-        /* bpm check용 구문.
-        if (this.bitCount % 2 == 0)
-        {
-            Debug.LogFormat("<color=red>{0}</color>", this.bitCount);
-        }
-        else
-        {
-            Debug.LogFormat("<color=blue>{0}</color>", this.bitCount);
-        }*/
         this.bitCount++;
     }
 }

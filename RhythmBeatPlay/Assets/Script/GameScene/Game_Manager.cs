@@ -9,6 +9,7 @@ public class Game_Manager : MonoBehaviour
     GameObject pause_ui;
     public int note_died = 0;
     public Text Start_Counter;
+    public string musicSelection = "82_BPM_Dubstep";
 
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class Game_Manager : MonoBehaviour
     int temp_count = 0;
     private void Update()
     {
-        if(note_died >= note_spawner.GetComponent<note_spawning>().totalNoteCount)
+        if (note_died > GameObject.Find(musicSelection).GetComponent<MusicData>().GetNoteCount())
         {
             Debug.Log("Song Ended");
         }
@@ -69,24 +70,10 @@ public class Game_Manager : MonoBehaviour
     }*/
 
     // 일시적인 사용의 pause.
-    public void Pause()
+    public void PauseButton()
     {
-        if (is_pause_possible)
+        if (is_pause_possible && !is_pause)
         {
-<<<<<<< Updated upstream
-            if (is_pause == false)
-            {
-                note_spawner.GetComponent<BPMcheck>().bgMusic.Pause();
-                pause_ui.SetActive(true);
-                is_pause = !is_pause;
-            }
-            else
-            {
-                StartCoroutine(PauseCounter());
-            }
-            
-=======
-
                 note_spawner.GetComponent<BPMcheck>().bgMusic.Pause();
                 pause_ui.SetActive(true);
                 is_pause = !is_pause;
@@ -98,7 +85,6 @@ public class Game_Manager : MonoBehaviour
         if (is_pause_possible)
         {
             StartCoroutine(PauseCounter());
->>>>>>> Stashed changes
         }
     }
 
