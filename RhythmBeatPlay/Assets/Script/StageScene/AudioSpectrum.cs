@@ -105,12 +105,20 @@ public class AudioSpectrum : MonoBehaviour
     {
         gameObject.SetActive(true);
         baseAudio.clip = audio;
-        baseAudio.Play();
-
+        resume();
     }
     public void stop()
     {
         baseAudio.Stop();
         gameObject.SetActive(false);
+    }
+    public void pause()
+    {
+        baseAudio.Pause();
+    }
+    public void resume()
+    {
+        baseAudio.volume = DataManager.Instance.music_volume;
+        baseAudio.Play();
     }
 }

@@ -4,7 +4,7 @@ public class StageSelectManager : SelectManager
 {
     protected override void Start()
     {
-        base.selectedObjNumber = DataObject.inst.stageNumber;
+        base.selectedObjNumber = DataManager.Instance.stageNumber;
         base.Start();
     }
     protected override void Update()
@@ -14,7 +14,7 @@ public class StageSelectManager : SelectManager
     protected override void objectSelect()
     {
         base.objectSelect();
-        DataObject.inst.stageNumber = base.selectedObjNumber;
-        SceneLoader.Instance.LoadScene("MusicScene");
+        DataManager.Instance.stageNumber = base.selectedObjNumber;
+        SceneLoader.Instance.LoadScene("MusicSelectScene");
     }
 }
