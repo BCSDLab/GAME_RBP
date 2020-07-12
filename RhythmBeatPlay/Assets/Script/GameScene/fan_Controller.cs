@@ -31,7 +31,6 @@ public class fan_Controller : MonoBehaviour
                     if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
                     {
                         Vector2 currentPosition = recipient.transform.position;
-                        Debug.Log("Moving " + nbTouches);
                         Vector2 moveTowards = Camera.main.ScreenToWorldPoint(touch.position);
 
                         movement = moveTowards - currentPosition;

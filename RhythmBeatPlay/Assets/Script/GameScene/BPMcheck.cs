@@ -25,7 +25,6 @@ public class BPMcheck : MonoBehaviour
     public int bitCount = 0;
 
     // 음악 켜짐 관련
-    public Button btn_Start;
     private bool musicOnOff;
     private Coroutine r1;
     private Coroutine r2;

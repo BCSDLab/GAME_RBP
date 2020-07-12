@@ -67,7 +67,6 @@ public class note_spawning : MonoBehaviour
 
     // 파싱 작업.
     public void Parse()
-
     {
         TextAsset parseData = Resources.Load("Notedatas/song2", typeof(TextAsset)) as TextAsset;
         StringReader sr = new StringReader(parseData.text);
