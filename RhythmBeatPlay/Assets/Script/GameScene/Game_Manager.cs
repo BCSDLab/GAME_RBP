@@ -1,36 +1,52 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Game_Manager : MonoBehaviour
 {
     public static Game_Manager instance;
-    GameObject pause_ui;
+    private GameObject pause_ui;
     public int note_died = 0;
     public Text Start_Counter;
+
+    public GameObject red_fan;
+    public GameObject blue_fan;
 
     private void Awake()
     {
         instance = this;
         pause_ui = GameObject.Find("PauseUI");
         pause_ui.SetActive(false);
+        red_fan = GameObject.Find("fan_red");
+        blue_fan = GameObject.Find("fan_blue");
     }
 
-    int temp_count = 0;
+    private int temp_count = 0;
+
     private void Update()
     {
-        if(note_died >= note_spawner.GetComponent<note_spawning>().totalNoteCount)
+        if (note_died >= note_spawner.GetComponent<note_spawning>().totalNoteCount)
         {
             Debug.Log("Song Ended");
         }
+        // 개발 중에만 사용할 부분이며, 알파 버전에서는 지워져야만 함.
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            notemaking_debug();
+        }
+    }
+
+    // 디버그용 함수.
+    public void notemaking_debug()
+    {
+        print(note_died + 6);
     }
 
     public bool is_pause = false; // 퍼즈 상태인지에 대한 값. 노트 update등에 사용됨.
     public bool is_pause_possible = false; // pause가 가능한 상태인지에 대해 확인해주는 값.
     public GameObject note_spawner;
-    
-    void Start()
+
+    private void Start()
     {
         this.GetComponent<UI_Manager>().ReturnCount(); // 게임 시작 카운트를 시작.
         //StartCoroutine(SongCounter(note_spawner.GetComponent<note_spawning>().musicTime));
@@ -53,25 +69,24 @@ public class Game_Manager : MonoBehaviour
             musicplayedtime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-
     }*/
 
     // 일시적인 사용의 pause.
     public void Pause()
     {
+        if (is_pause_possible && !is_pause)
+        {
+            note_spawner.GetComponent<BPMcheck>().bgMusic.Pause();
+            pause_ui.SetActive(true);
+            is_pause = !is_pause;
+        }
+    }
+
+    public void ResumeButton()
+    {
         if (is_pause_possible)
         {
-            if (is_pause == false)
-            {
-                note_spawner.GetComponent<BPMcheck>().bgMusic.Pause();
-                pause_ui.SetActive(true);
-                is_pause = !is_pause;
-            }
-            else
-            {
-                StartCoroutine(PauseCounter());
-            }
-            
+            StartCoroutine(PauseCounter());
         }
     }
 
@@ -91,5 +106,3 @@ public class Game_Manager : MonoBehaviour
         is_pause = !is_pause;
     }
 }
-
-
