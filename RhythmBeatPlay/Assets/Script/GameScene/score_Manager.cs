@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class score_Manager : MonoBehaviour
@@ -15,11 +13,11 @@ public class score_Manager : MonoBehaviour
     public Text score_Text; // 점수 텍스트 제작.
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         score = 0;
         combo_Count = 0;
-        note_Count = GameObject.Find("note_spawner").GetComponent<note_spawning>().totalNoteCount;
+        note_Count = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteCount();
         score_Step = 1000000 / note_Count;
     }
 

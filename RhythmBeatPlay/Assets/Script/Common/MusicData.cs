@@ -1,59 +1,92 @@
-﻿using System.Collections;
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class MusicData : MonoBehaviour
 {
     [SerializeField]
-    AudioClip music;
+    private AudioClip music;
 
     [SerializeField]
-    string title;
+    private string title;
 
     [SerializeField]
-    string artist;
+    private string artist;
 
     [SerializeField]
-    string album;
+    private string album;
 
     [SerializeField]
-    int noteCount;
+    private int noteCount;
 
     [SerializeField]
-    int bpm;
+    private int bpm;
 
     [SerializeField]
-    int musicLengthSecond;
+    float musicLengthSecond;
 
     // must be scaled 1:1
     [SerializeField]
-    Sprite titleSprite;
+    private Sprite titleSprite;
 
     // must be scaled 16:9
     [SerializeField]
-    Sprite backgroundSprite;
+    private Sprite backgroundSprite;
 
-    [SerializeField]
-    TextAsset noteData;
-    
+    List<note> noteData = new List<note>();
 
-    //
+
     private void Awake()
     {
-        
+        Parse();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void Parse()
     {
-        
-    }
+        List<string[]> data = new List<string[]>();
 
-    // Update is called once per frame
-    void Update()
-    {
+        TextAsset parseData = Resources.Load("
         
+        s/song1", typeof(TextAsset)) as TextAsset;
+        StringReader sr = new StringReader(parseData.text);
+
+        // 먼저 한줄을 읽는다.
+        string source = sr.ReadLine();
+        string[] values;
+        while (source != null)
+        {
+            values = source.Split(' ');  // 스페이스로 구분한다.
+            data.Add(values);
+            if (values.Length == 0)
+            {
+                sr.Close();
+                return;
+            }
+            source = sr.ReadLine();    // 한줄 읽는다.
+        }
+
+        // SetSongData
+        title = data[0][0];
+        artist = data[1][0];
+        Debug.Log("bpm" + int.Parse(data[2][0]));
+        Debug.Log("rate" + int.Parse(data[4][0]));
+        bpm = (int.Parse(data[2][0]) * int.Parse(data[4][0]));
+        noteCount = int.Parse(data[3][0]);
+
+        // 음악 설정
+        GameObject.Find("note_spawner").GetComponent<BPMcheck>().bpm = bpm;
+        GameObject.Find("note_spawner").GetComponent<BPMcheck>().bgMusic = GameObject.Find(title).GetComponent<AudioSource>();
+        musicLengthSecond = GameObject.Find("note_spawner").GetComponent<BPMcheck>().bgMusic.clip.length;
+
+        // SetNoteData
+        for (int i = 6; i < noteCount + 6; i++)
+        {
+            noteData.Add(new note(int.Parse(data[i][0]), int.Parse(data[i][1]), int.Parse(data[i][2])));
+        }
+         // 데이터는 모두 정상적으로 들어감을 확인함.
     }
 
     public AudioClip GetAudioClip()
@@ -86,7 +119,7 @@ public class MusicData : MonoBehaviour
         return bpm;
     }
 
-    public int GetMusicLengthSecond()
+    public float GetMusicLengthSecond()
     {
         return musicLengthSecond;
     }
@@ -101,7 +134,7 @@ public class MusicData : MonoBehaviour
         return backgroundSprite;
     }
 
-    public TextAsset GetNoteData()
+    public List<note> GetNoteData()
     {
         return noteData;
     }

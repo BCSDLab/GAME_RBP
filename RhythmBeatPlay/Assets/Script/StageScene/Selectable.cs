@@ -6,11 +6,13 @@ public class Selectable : MonoBehaviour
 {
     public int number;
     public string objectName;
+    [TextArea]
+    public string objectInfo;
     public AudioClip preview;
     void Update()
     {
-        transform.rotation = Quaternion.Euler(0,0,0);
-        
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+
     }
     public void init(int num, Vector3 position)
     {

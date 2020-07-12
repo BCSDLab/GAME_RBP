@@ -1,17 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 
 // 해당 부분을 프리팹과 게임 매니저로 옮기는게 맞는것 같음.
 public class note_spawning : MonoBehaviour
 {
     // 노트 경로
-    string m_strPath = "Assets/Resources/Notedatas/";
+    private string m_strPath = "Assets/Resources/Notedatas/";
 
     // 데이터 저장
-    List<string[]> data = new List<string[]>();
-    List<note> noteData = new List<note>();
+    private List<string[]> data = new List<string[]>();
+
+    private List<note> noteData = new List<note>();
     public string title;        // 타이틀
     public string artist;       // 아티스트
     public double bpm;          // BPM
@@ -21,21 +21,18 @@ public class note_spawning : MonoBehaviour
     public float musicTime;
 
     public List<note> noteList; // 노트 데이터 리스트
-    int num_data_count;
+    private int num_data_count;
 
     // 빨강, 파랑, 보라색 노트를 지정한 부분.
     public GameObject[] obj = new GameObject[3];
 
     private void Awake()
     {
-        Parse();
-        SetSongData();
-        GetNoteData();
         num_data_count = 0;
         //debug();
     }
 
-    void SetSongData()
+    private void SetSongData()
     {
         title = data[0][0];
         artist = data[1][0];
@@ -48,7 +45,7 @@ public class note_spawning : MonoBehaviour
         musicTime = this.GetComponent<BPMcheck>().bgMusic.clip.length;
     }
 
-    void GetNoteData()
+    private void GetNoteData()
     {
         for (int i = 6; i < totalNoteCount + 6; i++)
         {
@@ -71,7 +68,7 @@ public class note_spawning : MonoBehaviour
     // 파싱 작업.
     public void Parse()
     {
-        TextAsset parseData = Resources.Load("Notedatas/song1", typeof(TextAsset)) as TextAsset;
+        TextAsset parseData = Resources.Load("Notedatas/song2", typeof(TextAsset)) as TextAsset;
         StringReader sr = new StringReader(parseData.text);
 
         // 먼저 한줄을 읽는다.
@@ -90,8 +87,11 @@ public class note_spawning : MonoBehaviour
                 return;
             }
             source = sr.ReadLine();    // 한줄 읽는다.
-
         }
+        //musicSelection = "82 BPM Dubstep2";
+        Debug.Log("여기까진 되던데");
+        noteData = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteData();
+        note_count = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteCount();
     }
 
     public void noteSpawn(int _beatcount)
@@ -100,7 +100,7 @@ public class note_spawning : MonoBehaviour
         {
             GameObject note = Instantiate(obj[noteData[num_data_count].getType()], transform.position, Quaternion.Euler(0, 0, noteData[num_data_count].getDegree()));
             note.transform.parent = this.transform;
-            if (num_data_count < totalNoteCount)
+            if (num_data_count < note_count)
             {
                 num_data_count++;
             }
@@ -109,18 +109,20 @@ public class note_spawning : MonoBehaviour
 
     public class note
     {
-        int bar; // bpm의 마디를 의미.
-        int degree; // 각도
-        int type; // 종류
+        private int bar; // bpm의 마디를 의미.
+        private int degree; // 각도
+        private int type; // 종류
 
         public void setBar(int m_bar)
         {
             bar = m_bar;
         }
+
         public void setDegree(int m_degree)
         {
             degree = m_degree;
         }
+
         public void setType(int m_type)
         {
             type = m_type;
@@ -130,10 +132,12 @@ public class note_spawning : MonoBehaviour
         {
             return bar;
         }
+
         public int getDegree()
         {
             return degree;
         }
+
         public int getType()
         {
             return type;
@@ -146,6 +150,7 @@ public class note_spawning : MonoBehaviour
             degree = 0;
             type = 0;
         }
+
         public note(int m_bar, int m_degree, int m_type)
         {
             bar = m_bar;
@@ -154,4 +159,4 @@ public class note_spawning : MonoBehaviour
         }
     }
 }
-
+}

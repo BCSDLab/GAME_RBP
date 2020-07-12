@@ -8,6 +8,7 @@ public class Game_Manager : MonoBehaviour
     private GameObject pause_ui;
     public int note_died = 0;
     public Text Start_Counter;
+    public string musicSelection = "82_BPM_Dubstep";
 
     public GameObject red_fan;
     public GameObject blue_fan;
@@ -24,8 +25,8 @@ public class Game_Manager : MonoBehaviour
     private int temp_count = 0;
 
     private void Update()
-    {
-        if (note_died >= note_spawner.GetComponent<note_spawning>().totalNoteCount)
+    
+        if (note_died > GameObject.Find(musicSelection).GetComponent<MusicData>().GetNoteCount())
         {
             Debug.Log("Song Ended");
         }
@@ -41,6 +42,13 @@ public class Game_Manager : MonoBehaviour
     {
         print(note_died + 6);
     }
+
+    // 디버그용 함수.
+    public void notemaking_debug()
+    {
+        print(note_died+6);
+    }
+
 
     public bool is_pause = false; // 퍼즈 상태인지에 대한 값. 노트 update등에 사용됨.
     public bool is_pause_possible = false; // pause가 가능한 상태인지에 대해 확인해주는 값.
@@ -72,7 +80,7 @@ public class Game_Manager : MonoBehaviour
     }*/
 
     // 일시적인 사용의 pause.
-    public void Pause()
+    public void PauseButton()
     {
         if (is_pause_possible && !is_pause)
         {

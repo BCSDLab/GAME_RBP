@@ -13,7 +13,8 @@ public class StageSelectManager : SelectManager
     }
     protected override void objectSelect()
     {
+        base.objectSelect();
         DataObject.inst.stageNumber = base.selectedObjNumber;
-        SceneManager.LoadScene("MusicScene");
+        SceneLoader.Instance.LoadScene("MusicScene");
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1408420520819336209}
   - component: {fileID: 1408420520819336210}
   - component: {fileID: 1408420520819336211}
-  - component: {fileID: 213573996279198433}
+  - component: {fileID: 58484003817754044}
   m_Layer: 8
   m_Name: 0.SampleStage
   m_TagString: Selectable
@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408420520819336208}
-  m_LocalRotation: {x: 0.009599124, y: 0, z: 0, w: 0.9999539}
-  m_LocalPosition: {x: 0, y: 0, z: -50}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 1.1, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1408420520819336210
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -67,9 +67,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1010219793
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 4c01ef64cbef09840b901b55ba089470, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,17 +95,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   number: 0
   objectName: Sample Stage
-  preview: {fileID: 8300000, guid: cc3ccdd31fd1cdd41bcd284e738d0725, type: 3}
---- !u!135 &213573996279198433
-SphereCollider:
+  preview: {fileID: 8300000, guid: c5bc56e270df89b48a8beb954f788ea0, type: 3}
+--- !u!58 &58484003817754044
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408420520819336208}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 8.4
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 3.36

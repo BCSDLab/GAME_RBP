@@ -25,7 +25,7 @@ public class SubMenu : MonoBehaviour
     public void OnCloseButtonClicked()
     {
         BGSPlayer.Instance.playBGS("buttonOFF");
-        TitleUIManager.Instance.CloseSubMenu();
+        onClose();
     }
 
     public void ShowSettingBoard()
@@ -48,4 +48,13 @@ public class SubMenu : MonoBehaviour
 
     public void ShowCopyrightBoard() { }
 
+    public void onOpen()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void onClose()
+    {
+        gameObject.SetActive(false);
+    }
 }

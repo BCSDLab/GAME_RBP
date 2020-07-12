@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,35 +7,32 @@ using UnityEngine.UI;
 
 public class SelectManager : MonoBehaviour
 {
-    public Text infomationText;
+    public Text selectableName;
+    public Text selectableInfo;
     public int selectedObjNumber = 0;
     public float spinTime = 0.1f;
+    public float intervalX = 940f;
+    public float yPosition = -283f;
     public GameObject preview;
     public Selectable[] objectPrefabs;
     public Transform[] spawnPoints;
     public AudioSpectrum audioSpectrum;
     private bool spinning = false;
     private bool downed = false;
-    private int frontSpawn = 0;
     private List<Selectable> objects = new List<Selectable>();
     private Vector3 cursorPosition;
-    private void changeFrontObject()
-    {
-        var frontobj = objects.Find(obj => obj.number == selectedObjNumber);
-        infomationText.text = frontobj.objectName;
-        audioSpectrum.play(frontobj.preview);
-    }
     private int selectableComparer(Selectable s1, Selectable s2) //obj 정렬을 위한 비교자
     {
         return s1.number - s2.number;
     }
     private void spawnObject(int relation) //상대 위치로 obj 생성 후 번호순으로 정렬
     {
-        int spawnNumber = (frontSpawn + relation + 8) % 8;
         int objNumber = selectedObjNumber + relation;
-        var spawnPosition = spawnPoints[spawnNumber].position;
+        var spawnPosition = spawnPoints[2 + relation].position;
         var obj = Instantiate(objectPrefabs[objNumber], transform) as Selectable;
+        float scale = 100f - 40 * Math.Abs(relation);
         obj.init(objNumber, spawnPosition);
+        obj.transform.localScale = new Vector3(scale, scale, 1);
         objects.Add(obj);
         objects.Sort(selectableComparer);
     }
@@ -52,11 +50,14 @@ public class SelectManager : MonoBehaviour
                 spawnObject(i);
             }
         }
-        changeFrontObject();
+        var selectedObj = objects.Find(obj => obj.number == selectedObjNumber);
+        selectableName.text = selectedObj.objectName;
+        selectableInfo.text = selectedObj.objectInfo;
+        audioSpectrum.play(selectedObj.preview);
     }
     private void checkObjSelect()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount != 0 || Input.GetMouseButtonDown(0))
         {
             cursorPosition = Input.mousePosition;
             downed = true;
@@ -70,14 +71,13 @@ public class SelectManager : MonoBehaviour
             else if (Input.GetMouseButtonUp(0))
             {
                 var ray = Camera.main.ScreenPointToRay(cursorPosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit))
+                var hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+                if (hit.collider?.tag == "Selectable" && hit.collider.GetComponent<Selectable>().number == selectedObjNumber)
                 {
-                    if (hit.collider.tag == "Selectable" && hit.collider.GetComponent<Selectable>().number == selectedObjNumber)
-                    {
-                        objectSelect();
-                    }
+                    objectSelect();
                 }
+
             }
         }
     }
@@ -85,28 +85,41 @@ public class SelectManager : MonoBehaviour
     {
         checkObjSelect();
     }
-    private void basisRotate(Quaternion origin, float yAngle)
-    {
-        transform.rotation = origin;
-        transform.Rotate(0, yAngle, 0);
-    }
     private IEnumerator objectTurn(int direction) //스테이지를 spinTime동안 회전시킨다. direction 1:left, -1:right
     {
-        float v = 90f / spinTime;
+        float v = 2 * intervalX / spinTime;
         float a = -v / spinTime;
         float t = 0f;
-        var originRotation = transform.rotation;
+        float prevDist = 0f;
         spinning = true;
         while (t < spinTime)
         {
             t += Time.deltaTime;
-            float nextAngle = (a * t * t / 2 + v * t) * direction;
-            basisRotate(originRotation, nextAngle);
+            float nextDist = (a * t * t / 2 + v * t) * direction;
+            foreach (var obj in objects)
+            {
+                obj.transform.localPosition -= new Vector3(nextDist - prevDist, 0f);
+                float scale = 100 - 2 * Math.Abs(obj.transform.position.x) / 47f;
+                obj.transform.localScale = new Vector3(scale, scale);
+            }
+            prevDist = nextDist;
             yield return null;
         }
-        basisRotate(originRotation, 45f * direction);
-        changeFrontObject();
         spinning = false;
+        selectedObjNumber += direction;
+        foreach (var obj in objects)
+        {
+            int relation = obj.number - selectedObjNumber;
+            obj.transform.localPosition = new Vector3(relation * intervalX, yPosition);
+            float scale = 100 - 40 * Math.Abs(relation);
+            obj.transform.localScale = new Vector3(scale, scale);
+        }
+        if (isValidObject(selectedObjNumber + 2 * direction))
+            spawnObject(2 * direction);
+        var selectedObj = objects.Find(obj => obj.number == selectedObjNumber);
+        selectableName.text = selectedObj.objectName;
+        selectableInfo.text = selectedObj.objectInfo;
+        audioSpectrum.play(selectedObj.preview);
     }
     private void destroyLostObject(int direction) //보이지 않을 스테이지 삭제
     {
@@ -125,15 +138,11 @@ public class SelectManager : MonoBehaviour
         {
             audioSpectrum.stop();
             destroyLostObject(direction);
-            if (isValidObject(selectedObjNumber + 3 * direction))
-                spawnObject(3 * direction);
-            selectedObjNumber += direction;
-            frontSpawn = (frontSpawn + direction + 8) % 8;
             StartCoroutine(objectTurn(direction));
         }
     }
     protected virtual void objectSelect()
     {
-
+        audioSpectrum.stop();
     }
 }
