@@ -84,7 +84,7 @@ public class SettingBoard : MonoBehaviour
 
     public void bgsSliderValueChanged()
     {
-        DataManager.Instance.bgs_volume = (bgsVolumeSlider.value < 0.01f) ? 0 : musicVolumeSlider.value;
+        DataManager.Instance.bgs_volume = (bgsVolumeSlider.value < 0.01f) ? 0 : bgsVolumeSlider.value;
         bgsVolumeValue.text = ((int)(bgsVolumeSlider.value * 100)).ToString();
     }
 }
