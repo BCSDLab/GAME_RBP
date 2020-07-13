@@ -1,4 +1,5 @@
-﻿using System.Collections;
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,33 +8,33 @@ using System.IO;
 public class MusicData : MonoBehaviour
 {
     [SerializeField]
-    AudioClip music;
+    private AudioClip music;
 
     [SerializeField]
-    string title;
+    private string title;
 
     [SerializeField]
-    string artist;
+    private string artist;
 
     [SerializeField]
-    string album;
+    private string album;
 
     [SerializeField]
-    int noteCount;
+    private int noteCount;
 
     [SerializeField]
-    int bpm;
+    private int bpm;
 
     [SerializeField]
     float musicLengthSecond;
 
     // must be scaled 1:1
     [SerializeField]
-    Sprite titleSprite;
+    private Sprite titleSprite;
 
     // must be scaled 16:9
     [SerializeField]
-    Sprite backgroundSprite;
+    private Sprite backgroundSprite;
 
     List<note> noteData = new List<note>();
 
@@ -47,7 +48,9 @@ public class MusicData : MonoBehaviour
     {
         List<string[]> data = new List<string[]>();
 
-        TextAsset parseData = Resources.Load("Notedatas/song1", typeof(TextAsset)) as TextAsset;
+        TextAsset parseData = Resources.Load("
+        
+        s/song1", typeof(TextAsset)) as TextAsset;
         StringReader sr = new StringReader(parseData.text);
 
         // 먼저 한줄을 읽는다.

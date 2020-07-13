@@ -24,6 +24,11 @@ public class on_Hit_Note_P : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(0,0,fan_angle);
     }
 
+    // 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Purple_Note")
