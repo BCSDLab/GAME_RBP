@@ -138,4 +138,11 @@ public class SelectManager : MonoBehaviour
     {
         audioSpectrum.stop();
     }
+    public void EnableSelectableCollider(bool enable)
+    {
+        foreach (var i in objects)
+        {
+            i.collider.enabled = enable;
+        }
+    }
 }

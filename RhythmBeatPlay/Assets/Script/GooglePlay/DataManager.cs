@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 using System.Text;
 
@@ -76,6 +77,7 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    public UnityEvent music_volume_event;
     public float music_volume
     {
         get
@@ -84,9 +86,11 @@ public class DataManager : MonoBehaviour
         }
         set
         {
+            // music_volume_event.Invoke();
             PlayerPrefs.SetFloat("music_volume", value);
         }
     }
+
 
     public float bgs_volume
     {
@@ -156,7 +160,8 @@ public class DataManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(transform.gameObject);
+        music_volume_event = new UnityEvent();
+        DontDestroyOnLoad(this);
     }
 
     // Start is called before the first frame update

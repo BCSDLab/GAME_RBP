@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class SettingBoard : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class SettingBoard : MonoBehaviour
 
     public void onCloseButtonClicked()
     {
+        DataManager.Instance.music_volume_event.Invoke();
         BGSPlayer.Instance.playBGS("buttonOFF");
         Destroy(parent);
     }
@@ -68,16 +70,21 @@ public class SettingBoard : MonoBehaviour
 
 
     // function for slider
+    public void onSliderPointExit()
+    {
+        DataManager.Instance.music_volume_event.Invoke();
+        Debug.Log("point down invoked");
+    }
 
     public void musicSliderValueChanged()
     {
-        DataManager.Instance.music_volume = musicVolumeSlider.value;
+        DataManager.Instance.music_volume = (musicVolumeSlider.value < 0.01f) ? 0 : musicVolumeSlider.value;
         musicVolumeValue.text = ((int)(musicVolumeSlider.value * 100)).ToString();
     }
 
     public void bgsSliderValueChanged()
     {
-        DataManager.Instance.bgs_volume = bgsVolumeSlider.value;
+        DataManager.Instance.bgs_volume = (bgsVolumeSlider.value < 0.01f) ? 0 : musicVolumeSlider.value;
         bgsVolumeValue.text = ((int)(bgsVolumeSlider.value * 100)).ToString();
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AudioSpectrum : MonoBehaviour
 {
@@ -18,9 +19,21 @@ public class AudioSpectrum : MonoBehaviour
     public float maxYScale = 50f;
     public float lowIgnore = 0.2f;
     public float highIgnore = 0.2f;
+    private float currentVolumeScale = 0.0f;
     public AudioSource baseAudio;
     private GameObject[] barArray;
 
+    float volume_scale
+    {
+        get
+        {
+            return DataManager.Instance.music_volume;
+        }
+        set
+        {
+            DataManager.Instance.music_volume = value;
+        }
+    }
 
     private void instanciateBarArray() //모든 bar 객체 생성
     {
@@ -43,6 +56,15 @@ public class AudioSpectrum : MonoBehaviour
         barAmount -= barAmount % 2;
         barArray = new GameObject[barAmount];
         instanciateBarArray();
+    }
+    private void Awake()
+    {
+        baseAudio.volume = volume_scale;
+        DataManager.Instance.music_volume_event.AddListener(changeVolume);
+    }
+    private void OnDestroy()
+    {
+        DataManager.Instance.music_volume_event.RemoveListener(changeVolume);
     }
     private void rescaleBar(GameObject bar, float scale) //bar의 yscale 변경
     {
@@ -99,18 +121,21 @@ public class AudioSpectrum : MonoBehaviour
                 float scale = barScale[i] * amplification;
                 rescaleBar(barArray[i], scale);
             }
-        }
+        }      
     }
     public void play(AudioClip audio)
     {
         gameObject.SetActive(true);
         baseAudio.clip = audio;
         baseAudio.Play();
-
     }
     public void stop()
     {
         baseAudio.Stop();
         gameObject.SetActive(false);
+    }
+    public void changeVolume()
+    {
+        baseAudio.volume = volume_scale;
     }
 }

@@ -85,7 +85,7 @@ public class TitleUIManager : MonoBehaviour
         if (PlayCloudDataManager.Instance.isAuthenticated || PlayCloudDataManager.Instance.isGuest)
         {
             // SceneManager.LoadScene("GameScene");
-            SceneLoader.Instance.LoadScene("GameScene");
+            SceneLoader.Instance.LoadScene("StageScene");
         }
     }
 

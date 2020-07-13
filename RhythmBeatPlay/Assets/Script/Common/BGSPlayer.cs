@@ -27,7 +27,6 @@ public class BGSPlayer : MonoBehaviour
         }
     }
 
-
     Dictionary<string, AudioClip> bgs_set;
 
     float volume_scale
@@ -45,6 +44,12 @@ public class BGSPlayer : MonoBehaviour
     private void Awake()
     {
         bgs_set = new Dictionary<string, AudioClip>();
+
+        if (bgsPlayer == null)
+        {
+            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            bgsPlayer = audioSource;
+        }
         bgsPlayer.volume = 1.0f;
         bgsPlayer.loop = false;
         DontDestroyOnLoad(transform.gameObject);
