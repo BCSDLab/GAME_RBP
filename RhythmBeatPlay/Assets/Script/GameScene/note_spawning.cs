@@ -90,8 +90,8 @@ public class note_spawning : MonoBehaviour
         }
         //musicSelection = "82 BPM Dubstep2";
         Debug.Log("여기까진 되던데");
-        noteData = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteData();
-        note_count = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteCount();
+        // noteData = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteData();
+        totalNoteCount = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteCount();
     }
 
     public void noteSpawn(int _beatcount)
@@ -100,7 +100,7 @@ public class note_spawning : MonoBehaviour
         {
             GameObject note = Instantiate(obj[noteData[num_data_count].getType()], transform.position, Quaternion.Euler(0, 0, noteData[num_data_count].getDegree()));
             note.transform.parent = this.transform;
-            if (num_data_count < note_count)
+            if (num_data_count < totalNoteCount)
             {
                 num_data_count++;
             }
@@ -158,5 +158,4 @@ public class note_spawning : MonoBehaviour
             type = m_type;
         }
     }
-}
 }

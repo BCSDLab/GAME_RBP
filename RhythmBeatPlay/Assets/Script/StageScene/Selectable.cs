@@ -9,6 +9,8 @@ public class Selectable : MonoBehaviour
     [TextArea]
     public string objectInfo;
     public AudioClip preview;
+    public Collider2D collider;
+
     void Update()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);

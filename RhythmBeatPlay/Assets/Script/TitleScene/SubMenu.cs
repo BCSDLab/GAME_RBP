@@ -44,6 +44,22 @@ public class SubMenu : MonoBehaviour
         }
     }
 
+    public void ShowSettingBoardOnParent(GameObject obj)
+    {
+        GameObject settingBoard = Instantiate(Resources.Load("Prefabs/SettingBoardPrefab", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+
+        if (settingBoard)
+        {
+            BGSPlayer.Instance.playBGS("buttonON");
+            settingBoard.transform.SetParent(obj.transform);
+            settingBoard.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            Debug.Log("Cannot load prefab");
+        }
+    }
+
     public void ShowCreditBoard() { }
 
     public void ShowCopyrightBoard() { }
