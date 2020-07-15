@@ -60,5 +60,7 @@ RhythmBeatPlay/Assets/Firebase/
 
 # Resource
 
+*.prefab
+*.prefab.meta
 Resources/
 RhythmBeatPlay/Assets/Resources

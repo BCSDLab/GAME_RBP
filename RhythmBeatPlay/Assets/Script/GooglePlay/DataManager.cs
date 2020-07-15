@@ -104,6 +104,29 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    public int stageNumber
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("stageNumber", 0);
+        }
+        set
+        {
+            PlayerPrefs.SetInt("stageNumber", value);
+        }
+    }
+
+    public int musicNumber
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("musicNumber", 0);
+        }
+        set
+        {
+            PlayerPrefs.SetInt("musicNumber", value);
+        }
+    }
     #endregion
 
     #region public function

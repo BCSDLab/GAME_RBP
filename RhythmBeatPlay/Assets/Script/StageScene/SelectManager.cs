@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class SelectManager : MonoBehaviour
 {
+    public SubMenu subMenu;
     public Text selectableName;
     public Text selectableInfo;
     public int selectedObjNumber = 0;
@@ -17,6 +18,7 @@ public class SelectManager : MonoBehaviour
     public Selectable[] objectPrefabs;
     public Transform[] spawnPoints;
     public AudioSpectrum audioSpectrum;
+    private bool paused = false;
     private bool spinning = false;
     private bool downed = false;
     private List<Selectable> objects = new List<Selectable>();
@@ -62,7 +64,7 @@ public class SelectManager : MonoBehaviour
             cursorPosition = Input.mousePosition;
             downed = true;
         }
-        else if (downed)
+        else if (!paused && downed)
         {
             if ((cursorPosition - Input.mousePosition).magnitude > 100f)
             {
@@ -145,11 +147,18 @@ public class SelectManager : MonoBehaviour
     {
         audioSpectrum.stop();
     }
-    public void EnableSelectableCollider(bool enable)
+    public void onSettingButtonClick()
     {
-        foreach (var i in objects)
-        {
-            i.collider.enabled = enable;
-        }
+        BGSPlayer.Instance.playBGS("buttonON");
+        paused = true;
+        audioSpectrum.pause();
+        subMenu.onOpen();
+    }
+    public void onCloseButtonClick()
+    {
+        BGSPlayer.Instance.playBGS("buttonOFF");
+        paused = false;
+        audioSpectrum.resume();
+        subMenu.onClose();
     }
 }
