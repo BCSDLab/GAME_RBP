@@ -19,8 +19,6 @@ public class Game_Manager : MonoBehaviour
     public GameObject DataObjectHandled;
     public GameObject score_manager;
 
-    public GameObject DataObjectHandled;
-    public GameObject score_manager;
 
     private void Awake()
     {
@@ -29,7 +27,7 @@ public class Game_Manager : MonoBehaviour
         blue_fan = GameObject.Find("fan_blue");
         DataObjectHandled = GameObject.Find("DataObject");
         stage_number = 0;
-        stage_number = DataObjectHandled.GetComponent<DataObject>().stageNumber;
+        //stage_number = DataObjectHandled.GetComponent<DataManager>().stageNumber;
         switch (stage_number)
         {
             case 0:
@@ -47,30 +45,18 @@ public class Game_Manager : MonoBehaviour
 
     private void Update()
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        if (note_died > GameObject.Find(musicSelection).GetComponent<MusicData>().GetNoteCount())
-=======
         if (note_died > note_spawner.GetComponent<note_spawning>().totalNoteCount)
->>>>>>> Stashed changes
-=======
-        if (note_died > note_spawner.GetComponent<note_spawning>().totalNoteCount)
->>>>>>> Stashed changes
         {
             Debug.Log("Song Ended");
         }
     }
 
-<<<<<<< Updated upstream
-=======
     // 디버그용 함수.
     public void notemaking_debug()
     {
         print(note_died+6);
     }
 
-
->>>>>>> Stashed changes
     public bool is_pause = false; // 퍼즈 상태인지에 대한 값. 노트 update등에 사용됨.
     public bool is_pause_possible = false; // pause가 가능한 상태인지에 대해 확인해주는 값.
     public GameObject note_spawner;

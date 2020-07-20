@@ -68,15 +68,10 @@ public class note_spawning : MonoBehaviour
             }
             source = sr.ReadLine();    // 한줄 읽는다.
         }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         //musicSelection = "82 BPM Dubstep2";
         Debug.Log("여기까진 되던데");
         // noteData = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteData();
-        totalNoteCount = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteCount();
-=======
-=======
->>>>>>> Stashed changes
+        //totalNoteCount = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteCount();
 
         title = data[0][0];
         artist = data[1][0];
@@ -92,10 +87,6 @@ public class note_spawning : MonoBehaviour
         {
             noteData.Add(new note(int.Parse(data[i][0]), int.Parse(data[i][1]), int.Parse(data[i][2])));
         }
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     }
 
     public void noteSpawn(int _beatcount)
@@ -161,13 +152,6 @@ public class note_spawning : MonoBehaviour
             degree = m_degree;
             type = m_type;
         }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     }
-=======
     }*/
->>>>>>> Stashed changes
-=======
-    }*/
->>>>>>> Stashed changes
 }

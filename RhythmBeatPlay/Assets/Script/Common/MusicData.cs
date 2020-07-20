@@ -47,15 +47,7 @@ public class MusicData : MonoBehaviour
     {
         List<string[]> data = new List<string[]>();
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        TextAsset parseData = Resources.Load("Notedatas/song1", typeof(TextAsset)) as TextAsset;
-=======
         TextAsset parseData = Resources.Load("Resources/" + Game_Manager.instance.musicDataName, typeof(TextAsset)) as TextAsset;
->>>>>>> Stashed changes
-=======
-        TextAsset parseData = Resources.Load("Resources/" + Game_Manager.instance.musicDataName, typeof(TextAsset)) as TextAsset;
->>>>>>> Stashed changes
         StringReader sr = new StringReader(parseData.text);
 
         // 먼저 한줄을 읽는다.
