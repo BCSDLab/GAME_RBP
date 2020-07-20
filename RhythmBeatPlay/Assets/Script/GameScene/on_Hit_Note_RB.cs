@@ -11,6 +11,7 @@ public class on_Hit_Note_RB : MonoBehaviour
     GameObject blue_Fan;
     GameObject red_Fan;
 
+
     private float degree_Difference;
 
     enum Grade
@@ -48,7 +49,6 @@ public class on_Hit_Note_RB : MonoBehaviour
 
     private void Calculate_Score() // Sending judeged note_degrees.
     {
-        
         Debug.Log(Mathf.Rad2Deg * degree_Difference);
         // Is_Purple에서 보라색이 아니므로 0, 단계에 맞는 Increase_score grade를 주면 된다.
         if (degree_Difference >= 8.0) // Bad

@@ -7,44 +7,75 @@ public class Game_Manager : MonoBehaviour
     public static Game_Manager instance;
     public int note_died = 0;
     public Text Start_Counter;
+
     public string musicSelection = "82_BPM_Dubstep";
+    public string musicDataName = "song1";
+    public int stage_number = 0;
 
     public GameObject red_fan;
     public GameObject blue_fan;
     public GameObject pauseUI;
+
+    public GameObject DataObjectHandled;
+    public GameObject score_manager;
+
+    public GameObject DataObjectHandled;
+    public GameObject score_manager;
 
     private void Awake()
     {
         instance = this;
         red_fan = GameObject.Find("fan_red");
         blue_fan = GameObject.Find("fan_blue");
+        DataObjectHandled = GameObject.Find("DataObject");
+        stage_number = 0;
+        stage_number = DataObjectHandled.GetComponent<DataObject>().stageNumber;
+        switch (stage_number)
+        {
+            case 0:
+                musicSelection = "82_BPM_Dubstep";
+                musicDataName = "song1";
+                break;
+            case 1:
+                musicSelection = "108_BPM_Rainbow";
+                musicDataName = "song2";
+                break;
+        }
     }
 
     private int temp_count = 0;
 
     private void Update()
     {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         if (note_died > GameObject.Find(musicSelection).GetComponent<MusicData>().GetNoteCount())
+=======
+        if (note_died > note_spawner.GetComponent<note_spawning>().totalNoteCount)
+>>>>>>> Stashed changes
+=======
+        if (note_died > note_spawner.GetComponent<note_spawning>().totalNoteCount)
+>>>>>>> Stashed changes
         {
             Debug.Log("Song Ended");
         }
-        // 개발 중에만 사용할 부분이며, 알파 버전에서는 지워져야만 함.
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            notemaking_debug();
-        }
     }
 
+<<<<<<< Updated upstream
+=======
     // 디버그용 함수.
     public void notemaking_debug()
     {
-        print(note_died + 6);
+        print(note_died+6);
     }
 
+
+>>>>>>> Stashed changes
     public bool is_pause = false; // 퍼즈 상태인지에 대한 값. 노트 update등에 사용됨.
     public bool is_pause_possible = false; // pause가 가능한 상태인지에 대해 확인해주는 값.
     public GameObject note_spawner;
 
+    
     private void Start()
     {
         this.GetComponent<UI_Manager>().ReturnCount(); // 게임 시작 카운트를 시작.

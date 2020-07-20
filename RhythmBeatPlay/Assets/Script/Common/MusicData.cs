@@ -47,7 +47,15 @@ public class MusicData : MonoBehaviour
     {
         List<string[]> data = new List<string[]>();
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         TextAsset parseData = Resources.Load("Notedatas/song1", typeof(TextAsset)) as TextAsset;
+=======
+        TextAsset parseData = Resources.Load("Resources/" + Game_Manager.instance.musicDataName, typeof(TextAsset)) as TextAsset;
+>>>>>>> Stashed changes
+=======
+        TextAsset parseData = Resources.Load("Resources/" + Game_Manager.instance.musicDataName, typeof(TextAsset)) as TextAsset;
+>>>>>>> Stashed changes
         StringReader sr = new StringReader(parseData.text);
 
         // 먼저 한줄을 읽는다.
@@ -72,6 +80,7 @@ public class MusicData : MonoBehaviour
         Debug.Log("rate" + int.Parse(data[4][0]));
         bpm = (int.Parse(data[2][0]) * int.Parse(data[4][0]));
         noteCount = int.Parse(data[3][0]);
+        Debug.Log(noteCount);
 
         // 음악 설정
         GameObject.Find("note_spawner").GetComponent<BPMcheck>().bpm = bpm;

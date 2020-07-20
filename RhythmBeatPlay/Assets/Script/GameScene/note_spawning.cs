@@ -29,28 +29,8 @@ public class note_spawning : MonoBehaviour
     private void Awake()
     {
         num_data_count = 0;
+        Parse();
         //debug();
-    }
-
-    private void SetSongData()
-    {
-        title = data[0][0];
-        artist = data[1][0];
-        bpm = float.Parse(data[2][0]);
-        totalNoteCount = int.Parse(data[3][0]);
-        divCount = int.Parse(data[4][0]);
-        rbpm = bpm * divCount;
-        this.GetComponent<BPMcheck>().bpm = rbpm;
-        this.GetComponent<BPMcheck>().bgMusic = GameObject.Find(title).GetComponent<AudioSource>();
-        musicTime = this.GetComponent<BPMcheck>().bgMusic.clip.length;
-    }
-
-    private void GetNoteData()
-    {
-        for (int i = 6; i < totalNoteCount + 6; i++)
-        {
-            noteData.Add(new note(int.Parse(data[i][0]), int.Parse(data[i][1]), int.Parse(data[i][2])));
-        }
     }
 
     public void debug()
@@ -68,7 +48,7 @@ public class note_spawning : MonoBehaviour
     // 파싱 작업.
     public void Parse()
     {
-        TextAsset parseData = Resources.Load("Notedatas/song2", typeof(TextAsset)) as TextAsset;
+        TextAsset parseData = Resources.Load("Notedatas/" + Game_Manager.instance.musicDataName, typeof(TextAsset)) as TextAsset;
         StringReader sr = new StringReader(parseData.text);
 
         // 먼저 한줄을 읽는다.
@@ -88,10 +68,34 @@ public class note_spawning : MonoBehaviour
             }
             source = sr.ReadLine();    // 한줄 읽는다.
         }
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         //musicSelection = "82 BPM Dubstep2";
         Debug.Log("여기까진 되던데");
         // noteData = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteData();
         totalNoteCount = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteCount();
+=======
+=======
+>>>>>>> Stashed changes
+
+        title = data[0][0];
+        artist = data[1][0];
+        bpm = float.Parse(data[2][0]);
+        totalNoteCount = int.Parse(data[3][0]);
+        divCount = int.Parse(data[4][0]);
+        rbpm = bpm * divCount;
+        this.GetComponent<BPMcheck>().bpm = rbpm;
+        this.GetComponent<BPMcheck>().bgMusic = GameObject.Find(title).GetComponent<AudioSource>();
+        musicTime = this.GetComponent<BPMcheck>().bgMusic.clip.length;
+
+        for (int i = 6; i < totalNoteCount + 6; i++)
+        {
+            noteData.Add(new note(int.Parse(data[i][0]), int.Parse(data[i][1]), int.Parse(data[i][2])));
+        }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     }
 
     public void noteSpawn(int _beatcount)
@@ -107,7 +111,7 @@ public class note_spawning : MonoBehaviour
         }
     }
 
-    public class note
+    /*public class note
     {
         private int bar; // bpm의 마디를 의미.
         private int degree; // 각도
@@ -157,5 +161,13 @@ public class note_spawning : MonoBehaviour
             degree = m_degree;
             type = m_type;
         }
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     }
+=======
+    }*/
+>>>>>>> Stashed changes
+=======
+    }*/
+>>>>>>> Stashed changes
 }

@@ -9,15 +9,21 @@ public class score_Manager : MonoBehaviour
 
     public int combo_Count; // 콤보 카운터
 
-
+    public GameObject note_spawner;
     public Text score_Text; // 점수 텍스트 제작.
+
+    private void Awake()
+    {
+        note_spawner = GameObject.Find("note_spawner");
+    }
 
     // Start is called before the first frame update
     private void Start()
     {
         score = 0;
         combo_Count = 0;
-        note_Count = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteCount();
+        //note_Count = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteCount();
+        note_Count = note_spawner.GetComponent<note_spawning>().totalNoteCount;
         score_Step = 1000000 / note_Count;
     }
 
