@@ -60,6 +60,11 @@ public class AudioSpectrum : MonoBehaviour
     private void Awake()
     {
         baseAudio.volume = volume_scale;
+        DataManager.Instance.music_volume_event.AddListener(changeVolume);
+    }
+    private void OnDestroy()
+    {
+        DataManager.Instance.music_volume_event.RemoveListener(changeVolume);
     }
     private void rescaleBar(GameObject bar, float scale) //bar의 yscale 변경
     {
@@ -132,6 +137,10 @@ public class AudioSpectrum : MonoBehaviour
     public void pause()
     {
         baseAudio.Pause();
+    }
+    public void changeVolume()
+    {
+        baseAudio.volume = volume_scale;
     }
     public void resume()
     {
