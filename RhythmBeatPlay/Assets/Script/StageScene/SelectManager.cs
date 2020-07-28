@@ -18,7 +18,6 @@ public class SelectManager : MonoBehaviour
     public Selectable[] objectPrefabs;
     public Transform[] spawnPoints;
     public AudioSpectrum audioSpectrum;
-    private bool paused = false;
     private bool spinning = false;
     private bool downed = false;
     private List<Selectable> objects = new List<Selectable>();
@@ -64,7 +63,7 @@ public class SelectManager : MonoBehaviour
             cursorPosition = Input.mousePosition;
             downed = true;
         }
-        else if (!paused && downed)
+        else if (downed)
         {
             if ((cursorPosition - Input.mousePosition).magnitude > 100f)
             {
@@ -150,15 +149,19 @@ public class SelectManager : MonoBehaviour
     public void onSettingButtonClick()
     {
         BGSPlayer.Instance.playBGS("buttonON");
-        paused = true;
-        audioSpectrum.pause();
         subMenu.onOpen();
+        foreach (var i in objects)
+        {
+            i.collider.enabled = false;
+        }
     }
     public void onCloseButtonClick()
     {
         BGSPlayer.Instance.playBGS("buttonOFF");
-        paused = false;
-        audioSpectrum.resume();
         subMenu.onClose();
+        foreach (var i in objects)
+        {
+            i.collider.enabled = true;
+        }
     }
 }

@@ -340,6 +340,7 @@ MonoBehaviour:
   score_Step: 0
   note_Count: 0
   combo_Count: 0
+  note_spawner: {fileID: 0}
   score_Text: {fileID: 1740959671}
 --- !u!4 &340407890
 Transform:
@@ -370,9 +371,12 @@ MonoBehaviour:
   note_died: 0
   Start_Counter: {fileID: 1342907929}
   musicSelection: 82_BPM_Dubstep
+  musicDataName: song1
+  stage_number: 0
   red_fan: {fileID: 1107088613}
   blue_fan: {fileID: 1501320753}
-  pauseUI: {fileID: 500465205}
+  DataObjectHandled: {fileID: 0}
+  score_manager: {fileID: 0}
   is_pause: 0
   is_pause_possible: 0
   note_spawner: {fileID: 1797893498}
@@ -433,7 +437,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8091a2f9bd2ac549a5b79acb2825ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notecounter: {fileID: 0}
 --- !u!68 &347392459
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -1780,7 +1783,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1107088614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2181,7 +2184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!60 &1501320754
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2518,6 +2521,7 @@ MonoBehaviour:
   totalNoteCount: 0
   divCount: 0
   musicTime: 0
+  noteList: []
   obj:
   - {fileID: 2410803603146073159, guid: 842d6a5925ab67c4d9495f254fa48f37, type: 3}
   - {fileID: 6841891503198077080, guid: c3e782c3602113344a8ff2ee22c60618, type: 3}

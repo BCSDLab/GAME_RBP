@@ -12,7 +12,7 @@ public class on_Hit_Note_Edge : MonoBehaviour
     {
         score_Manager = GameObject.Find("ScoreManager");
     }
-    public Text notecounter;
+    //public Text notecounter;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -21,7 +21,7 @@ public class on_Hit_Note_Edge : MonoBehaviour
             Destroy(collision.gameObject);
             score_Manager.GetComponent<score_Manager>().Increase_Score(true, 0);
             Game_Manager.instance.note_died++;
-            notecounter.text = (Game_Manager.instance.note_died + 6).ToString();
+            //notecounter.text = (Game_Manager.instance.note_died + 6).ToString();
         }
     }
 }
