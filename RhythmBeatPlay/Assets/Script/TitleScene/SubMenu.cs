@@ -30,8 +30,8 @@ public class SubMenu : MonoBehaviour
 
     public void ShowSettingBoard()
     {
-        GameObject settingBoard = Instantiate(Resources.Load("Prefabs/SettingBoardPrefab", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
-
+        GameObject settingBoard = Instantiate(Resources.Load("Prefabs/SettingBoardPrefab", typeof(GameObject)), Vector3.zero , Quaternion.identity) as GameObject;
+        
         if (settingBoard)
         {
             BGSPlayer.Instance.playBGS("buttonON");

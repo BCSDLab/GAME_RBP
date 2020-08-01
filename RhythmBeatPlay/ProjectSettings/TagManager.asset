@@ -8,11 +8,10 @@ TagManager:
   - Red_Hitpoint
   - Blue_Note
   - Red_Note
-  - Purple_Hitpoint_Redside
-  - Purple_Hitpoint_Blueside
   - Purple_Note
   - Circle
   - Selectable
+  - Purple_Hitpoint
   layers:
   - Default
   - TransparentFX

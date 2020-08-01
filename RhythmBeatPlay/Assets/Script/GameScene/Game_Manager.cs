@@ -11,7 +11,7 @@ public class Game_Manager : MonoBehaviour
     public string musicSelection = "82_BPM_Dubstep";
     public string musicDataName = "song1";
     public int stage_number = 0;
-
+    
     public GameObject red_fan;
     public GameObject blue_fan;
     public GameObject pauseUI;

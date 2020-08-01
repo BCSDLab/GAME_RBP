@@ -15,7 +15,7 @@ public class purple_Note_Touching : MonoBehaviour
 {
     //public GameObject FX_OnHitNote;
     private GameObject score_Manager;
-
+    public GameObject[] hit_particles = new GameObject[5];
     public bool red_triggered;
     public bool blue_triggered;
 
@@ -38,6 +38,7 @@ public class purple_Note_Touching : MonoBehaviour
            this.transform.rotation.z >= Game_Manager.instance.blue_fan.transform.rotation.z - fan_halfsize + note_halfsize)
         { // 해당 부분이 노트 트리거 부분을 대신하게 됨.
             float localScale = this.transform.localScale.x;
+
             Destroy(this.gameObject);
             Game_Manager.instance.note_died++;
             Calculate_Score(localScale);
@@ -48,18 +49,26 @@ public class purple_Note_Touching : MonoBehaviour
     {
         if (_localScale <= 180)
         {
+            //Instantiate(Resources.Load("Prefabs/GameScene/Particle_Bad"), new Vector3(0,540,0), transform.rotation);
+            Instantiate(hit_particles[(int)Grade.Bad], new Vector3(0,540,0), transform.rotation);
             score_Manager.GetComponent<score_Manager>().Increase_Score(false, (int)Grade.Bad);
         }
         else if (_localScale <= 190)
         {
+            //Instantiate(Resources.Load("Prefabs/GameScene/Particle_Normal"), new Vector3(0,540,0), transform.rotation);
+            Instantiate(hit_particles[(int)Grade.Normal], new Vector3(0,540,0), transform.rotation);
             score_Manager.GetComponent<score_Manager>().Increase_Score(false, (int)Grade.Normal);
         }
         else if (_localScale <= 200)
         {
+            //Instantiate(Resources.Load("Prefabs/GameScene/Particle_Good"), new Vector3(0,540,0), transform.rotation);
+            Instantiate(hit_particles[(int)Grade.Good], new Vector3(0,540,0), transform.rotation);
             score_Manager.GetComponent<score_Manager>().Increase_Score(false, (int)Grade.Good);
         }
         else if (_localScale <= 205)
         {
+            //Instantiate(Resources.Load("Prefabs/GameScene/Particle_Bad"), new Vector3(0,540,0), transform.rotation);
+            Instantiate(hit_particles[(int)Grade.Perfect], new Vector3(0,540,0), transform.rotation);
             score_Manager.GetComponent<score_Manager>().Increase_Score(false, (int)Grade.Perfect);
         }
 
