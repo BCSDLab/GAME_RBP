@@ -1311,7 +1311,7 @@ MonoBehaviour:
   preview: {fileID: 390644383}
   objectPrefabs:
   - {fileID: 1408420520819336211, guid: 98564f04c2146ed4e896d338af1aef03, type: 3}
-  - {fileID: 1408420520819336211, guid: 59a620834438303408370cbbb4dc6cfb, type: 3}
+  - {fileID: 1408420520819336211, guid: 28b8553dd6be65c4d85a907733f870f9, type: 3}
   spawnPoints:
   - {fileID: 1585625099}
   - {fileID: 1987078632}

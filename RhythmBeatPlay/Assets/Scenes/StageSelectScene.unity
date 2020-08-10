@@ -1198,8 +1198,6 @@ MonoBehaviour:
   objectPrefabs:
   - {fileID: 1408420520819336211, guid: 2b2b28c9ac8e8544691692ce5a7198af, type: 3}
   - {fileID: 1408420520819336211, guid: 465de36fdcee89342b1c5915685d1ffb, type: 3}
-  - {fileID: 1408420520819336211, guid: 465de36fdcee89342b1c5915685d1ffb, type: 3}
-  - {fileID: 1408420520819336211, guid: 465de36fdcee89342b1c5915685d1ffb, type: 3}
   spawnPoints:
   - {fileID: 646458713}
   - {fileID: 1740011771}
