@@ -6,6 +6,7 @@ using UnityEngine;
 public class note_spawning : MonoBehaviour
 {
     // 노트 경로
+    public static note_spawning instance;
     private string m_strPath = "Assets/Resources/Notedatas/";
 
     // 데이터 저장
@@ -28,6 +29,14 @@ public class note_spawning : MonoBehaviour
 
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
         num_data_count = 0;
         Parse();
         //debug();
