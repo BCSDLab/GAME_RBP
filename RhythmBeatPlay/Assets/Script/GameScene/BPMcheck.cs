@@ -51,14 +51,12 @@ public class BPMcheck : MonoBehaviour
             Debug.Log("Song On");
             this.bgMusic.gameObject.GetComponent<AudioSource>().Play();
             this.r1 = StartCoroutine(this.Metronome());
-            //this.r2 = StartCoroutine(this.Up());
             this.musicOnOff = true;
         }
         else
         {
             this.bgMusic.gameObject.GetComponent<AudioSource>().Stop();
             StopCoroutine(r1);
-            //StopCoroutine(r2);
             this.musicOnOff = false;
             this.bitCount = 0;
         }

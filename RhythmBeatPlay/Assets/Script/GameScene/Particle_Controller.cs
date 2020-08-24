@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class Particle_Controller : MonoBehaviour
 {
-    ParticleSystem ps;
-    void Start()
+    void Awake()
     {
-        ps = GetComponent<ParticleSystem>();
-        StartCoroutine(SelfDestruct());
+        GameObject clone = this.gameObject;
+        Destroy(clone, 0.5f);
     }
-
-    IEnumerator SelfDestruct()
-    {
-        yield return new WaitForSeconds(1.0f);
-        Destroy(this);
-    } 
 }
