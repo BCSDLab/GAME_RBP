@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Game_Manager : MonoBehaviour
@@ -27,7 +28,12 @@ public class Game_Manager : MonoBehaviour
         blue_fan = GameObject.Find("fan_blue");
         DataObjectHandled = GameObject.Find("DataObject");
         stage_number = 0;
-        //stage_number = DataObjectHandled.GetComponent<DataManager>().stageNumber;
+        try
+        {
+            stage_number = DataObjectHandled.GetComponent<DataManager>().stageNumber;
+        }
+        catch{}
+
         switch (stage_number)
         {
             case 0:
@@ -120,5 +126,11 @@ public class Game_Manager : MonoBehaviour
         is_pause_possible = true;
         note_spawner.GetComponent<BPMcheck>().bgMusic.Play();
         is_pause = !is_pause;
+    }
+
+    public void ResultSceneLoad()
+    {
+        DataLoader.instance.UpdateScore();
+        SceneManager.LoadScene("ResultScene", LoadSceneMode.Single);
     }
 }

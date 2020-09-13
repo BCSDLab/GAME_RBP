@@ -50,7 +50,7 @@ public class UI_Manager : MonoBehaviour
             progress_bar.value += degreepersec;
             songtime--;
         }
-
         Debug.Log("MUsic ENDED!");
+        Game_Manager.instance.ResultSceneLoad();
     }
 }

@@ -72,15 +72,11 @@ public class note_spawning : MonoBehaviour
 
             {
                 sr.Close();
-
                 return;
             }
             source = sr.ReadLine();    // 한줄 읽는다.
         }
-        //musicSelection = "82 BPM Dubstep2";
         Debug.Log("여기까진 되던데");
-        // noteData = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteData();
-        //totalNoteCount = GameObject.Find(Game_Manager.instance.musicSelection).GetComponent<MusicData>().GetNoteCount();
 
         title = data[0][0];
         artist = data[1][0];
@@ -104,63 +100,14 @@ public class note_spawning : MonoBehaviour
         {
             GameObject note = Instantiate(obj[noteData[num_data_count].getType()], transform.position, Quaternion.Euler(0, 0, noteData[num_data_count].getDegree()));
             note.transform.parent = this.transform;
-            if (num_data_count < totalNoteCount)
+            if (num_data_count < totalNoteCount-1)
             {
                 num_data_count++;
             }
+            else
+            {
+                Debug.Log("Song ended");
+            }
         }
     }
-
-    /*public class note
-    {
-        private int bar; // bpm의 마디를 의미.
-        private int degree; // 각도
-        private int type; // 종류
-
-        public void setBar(int m_bar)
-        {
-            bar = m_bar;
-        }
-
-        public void setDegree(int m_degree)
-        {
-            degree = m_degree;
-        }
-
-        public void setType(int m_type)
-        {
-            type = m_type;
-        }
-
-        public int getBar()
-        {
-            return bar;
-        }
-
-        public int getDegree()
-        {
-            return degree;
-        }
-
-        public int getType()
-        {
-            return type;
-        }
-
-        // constructor
-        public note()
-        {
-            bar = 0;
-            degree = 0;
-            type = 0;
-        }
-
-        public note(int m_bar, int m_degree, int m_type)
-        {
-            bar = m_bar;
-            degree = m_degree;
-            type = m_type;
-        }
-    }
-    }*/
 }

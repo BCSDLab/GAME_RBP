@@ -31,8 +31,6 @@ public class purple_Note_Touching : MonoBehaviour
 
     private void OnMouseDown() // 해당 노트에 터치가 먹혔을 경우 (180 스케일 (최소 판정 이상))
     {
-        print("touch detected!");
-        //Destroy(this.gameObject);
         if (this.transform.localScale.x >= 180 &&
            this.transform.rotation.z <= Game_Manager.instance.red_fan.transform.rotation.z + fan_halfsize - note_halfsize &&
            this.transform.rotation.z >= Game_Manager.instance.blue_fan.transform.rotation.z - fan_halfsize + note_halfsize)
