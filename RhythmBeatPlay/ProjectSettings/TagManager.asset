@@ -12,6 +12,7 @@ TagManager:
   - Circle
   - Selectable
   - Purple_Hitpoint
+  - Bit_Hitpoint
   layers:
   - Default
   - TransparentFX
